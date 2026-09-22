@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dapaz Confeitaria — Bolos decorados e personalizados</title>
+<meta name="description" content="Bolos decorados e personalizados para casamentos, aniversários e eventos. Encomende com a Dapaz Confeitaria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#FBF6F0',
+          'rose-dust': '#D9AFA5',
+          'rose-deep': '#8B5A54',
+          gold: '#B8935B',
+          ink: '#2B211D',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'Georgia', 'serif'],
+          body: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --cream:#FBF6F0; --rose-dust:#D9AFA5; --rose-deep:#8B5A54; --gold:#B8935B; --ink:#2B211D;
+  }
+  html { scroll-padding-top: 96px; scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  h1, h2, h3, .font-display { font-family: 'Fraunces', Georgia, serif; }
+
+  .site-header { top: env(safe-area-inset-top, 0px); }
+
+  /* Hero carousel */
+  .hero-slide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.1s ease;
+    position: absolute;
+    inset: 0;
+  }
+  .hero-slide.active { opacity: 1; visibility: visible; position: relative; }
+  .hero-slide:not(.active) { position: absolute; }
+
+  .hero-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.45); transition: all .35s ease; }
+  .hero-dot.active { width: 26px; background: #fff; }
+
+  /* Gallery */
+  .gallery-card { transition: transform .5s cubic-bezier(.2,.7,.3,1); }
+  .gallery-overlay { opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; }
+  .gallery-card:hover .gallery-overlay,
+  .gallery-card:focus-within .gallery-overlay { opacity: 1; transform: translateY(0); }
+  .gallery-card:hover .gallery-art { transform: scale(1.06); }
+  .gallery-art { transition: transform .6s cubic-bezier(.2,.7,.3,1); }
+
+  .filter-pill[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  /* WhatsApp float */
+  .wa-pulse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: #3FBE64;
+    animation: wa-pulse 2.2s cubic-bezier(0,0,.2,1) infinite;
+  }
+  @keyframes wa-pulse {
+    0% { transform: scale(1); opacity: .55; }
+    70% { transform: scale(1.9); opacity: 0; }
+    100% { opacity: 0; }
+  }
+  .wa-bubble {
+    opacity: 0; transform: translateY(6px) scale(.96);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+  }
+  .wa-bubble.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+  :focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 2px; }
+
+  .divider-gold { width: 56px; height: 2px; background: var(--gold); }
+
+  .step-line { background: linear-gradient(90deg, transparent, var(--rose-dust) 20%, var(--rose-dust) 80%, transparent); }
+
+  .fade-scroll { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-scroll.in-view { opacity: 1; transform: translateY(0); }
+
+  #mobileMenu { transition: max-height .4s ease, opacity .3s ease; }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ HEADER ============ -->
+<header id="siteHeader" class="site-header fixed left-0 right-0 z-50 transition-colors duration-500 bg-cream/80 backdrop-blur-sm border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="#inicio" class="flex flex-col leading-none">
+        <span class="font-display text-2xl sm:text-[1.65rem] tracking-tight text-ink">Dapaz</span>
+        <span class="text-[0.62rem] tracking-[0.25em] text-rose-deep font-medium mt-0.5">CONFEITARIA</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-9 text-[0.92rem] text-ink/80">
+        <a href="#inicio" class="hover:text-rose-deep transition-colors">Início</a>
+        <a href="#galeria" class="hover:text-rose-deep transition-colors">Galeria</a>
+        <a href="#como-encomendar" class="hover:text-rose-deep transition-colors">Como encomendar</a>
+        <a href="#sabores" class="hover:text-rose-deep transition-colors">Sabores</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#como-encomendar"
+           class="hidden md:inline-flex items-center gap-2 bg-ink text-cream text-sm font-medium px-5 py-2.5 rounded-full hover:bg-rose-deep transition-colors">
+          Encomendar agora
+        </a>
+        <button id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu"
+                class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px] rounded-full border border-ink/15">
+          <span class="menu-bar block w-5 h-px bg-ink transition-all"></span>
+          <span class="menu-bar block w-5 h-px bg-ink transition-all"></span>
+          <span class="menu-bar block w-4 h-px bg-ink transition-all self-end mr-[9px]"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav id="mobileMenu" class="md:hidden overflow-hidden max-h-0 opacity-0 bg-cream border-t border-ink/10">
+    <div class="flex flex-col px-5 py-4 gap-1 text-[0.95rem]">
+      <a href="#inicio" class="py-2.5 border-b border-ink/5">Início</a>
+      <a href="#galeria" class="py-2.5 border-b border-ink/5">Galeria</a>
+      <a href="#como-encomendar" class="py-2.5 border-b border-ink/5">Como encomendar</a>
+      <a href="#sabores" class="py-2.5 border-b border-ink/5">Sabores</a>
+      <a href="#como-encomendar" class="mt-3 text-center bg-ink text-cream rounded-full py-3 font-medium">Encomendar agora</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="inicio" class="relative h-[100svh] min-h-[560px] w-full overflow-hidden">
+
+  <div id="heroSlides" class="absolute inset-0">
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background-image: linear-gradient(90deg, rgba(43,33,29,.55), rgba(43,33,29,.05)), url('img/stitc.jpeg'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-ink/10"></div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background-image: linear-gradient(90deg, rgba(43,33,29,.55), rgba(43,33,29,.05)), url('img/sti.jpeg'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-ink/10"></div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background-image: linear-gradient(90deg, rgba(43,33,29,.55), rgba(43,33,29,.05)), url('img/nossa.jpeg'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-ink/10"></div>
+    </div>
+  </div>
+
+  <div class="relative z-10 h-full max-w-7xl mx-auto px-5 sm:px-8 flex items-end pb-24 sm:pb-28">
+    <div class="max-w-xl">
+      <p class="text-cream/90 tracking-[0.2em] text-xs font-medium mb-4">DOÇURA COM ASSINATURA</p>
+      <h1 class="font-display italic text-4xl sm:text-6xl leading-[1.05] text-white drop-shadow-sm">
+        Bolos que contam<br class="hidden sm:block"> a sua história
+      </h1>
+      <div class="divider-gold my-6"></div>
+      <p class="text-white/90 text-base sm:text-lg max-w-md">
+        Criações artesanais e personalizadas para casamentos, aniversários e celebrações que merecem ser inesquecíveis.
+      </p>
+      <a href="#como-encomendar"
+         class="inline-flex items-center gap-2 mt-8 bg-white text-ink text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-gold hover:text-white transition-colors">
+        Solicitar orçamento
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2.5">
+    <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+    <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+  </div>
+
+  <button id="heroPrev" aria-label="Slide anterior"
+          class="hidden sm:flex absolute left-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full border border-white/50 text-white hover:bg-white/15 transition-colors">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button id="heroNext" aria-label="Próximo slide"
+          class="hidden sm:flex absolute right-5 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center rounded-full border border-white/50 text-white hover:bg-white/15 transition-colors">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section id="galeria" class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-28">
+  <div class="fade-scroll max-w-xl mb-3">
+    <p class="text-rose-deep tracking-[0.2em] text-xs font-medium mb-3">NOSSO TRABALHO</p>
+    <h2 class="font-display text-3xl sm:text-4xl">Uma galeria de momentos doces</h2>
+  </div>
+
+  <div class="fade-scroll flex flex-wrap gap-2.5 mt-9 mb-10">
+    <button class="filter-pill" data-filter="todos" aria-pressed="true">Todos</button>
+    <button class="filter-pill" data-filter="casamento" aria-pressed="false">Casamento</button>
+    <button class="filter-pill" data-filter="aniversario" aria-pressed="false">Aniversário</button>
+    <button class="filter-pill" data-filter="infantil" aria-pressed="false">Infantil</button>
+    <button class="filter-pill" data-filter="bento" aria-pressed="false">Bento Cakes</button>
+    <button class="filter-pill" data-filter="corporativo" aria-pressed="false">Corporativo</button>
+  </div>
+
+  <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+    <!-- cards injected via JS -->
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="bg-rose-deep/5 py-24 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 text-center fade-scroll">
+    <p class="text-rose-deep tracking-[0.2em] text-xs font-medium mb-3">BASTIDORES</p>
+    <h2 class="font-display text-3xl sm:text-4xl mb-3">Acompanhe no Instagram</h2>
+    <a href="https://www.instagram.com/dapaz_confeitaria?stkn=MTFxaWRpcHZ0Mnd0ag==" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 text-ink font-medium hover:text-rose-deep transition-colors">
+      @dapaz_confeitaria
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 grid grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3 mt-10 fade-scroll">
+    <!-- 6 instagram-style tiles -->
+  </div>
+</section>
+
+<!-- ============ COMO ENCOMENDAR ============ -->
+<section id="como-encomendar" class="max-w-7xl mx-auto px-5 sm:px-8 py-24 sm:py-28">
+  <div class="fade-scroll max-w-xl mb-16">
+    <p class="text-rose-deep tracking-[0.2em] text-xs font-medium mb-3">PASSO A PASSO</p>
+    <h2 class="font-display text-3xl sm:text-4xl">Do sonho ao bolo, em três passos</h2>
+  </div>
+
+  <div class="relative grid sm:grid-cols-3 gap-10 sm:gap-6">
+    <div class="hidden sm:block step-line absolute top-9 left-[16%] right-[16%] h-px"></div>
+
+    <div class="fade-scroll relative text-center sm:px-4">
+      <div class="w-[72px] h-[72px] mx-auto rounded-full bg-cream border border-rose-dust flex items-center justify-center relative z-10">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 19l5-15 5 15M6.5 12h5M14 9l3 10M17.5 15h-1" stroke="#8B5A54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="font-display italic text-rose-dust text-lg block mt-5">01</span>
+      <h3 class="font-display text-xl mt-1 mb-2">Escolha o modelo</h3>
+      <p class="text-ink/65 text-sm leading-relaxed max-w-[230px] mx-auto">
+        Navegue pela galeria ou traga sua própria inspiração — adaptamos o design ao seu evento.
+      </p>
+    </div>
+
+    <div class="fade-scroll relative text-center sm:px-4">
+      <div class="w-[72px] h-[72px] mx-auto rounded-full bg-cream border border-rose-dust flex items-center justify-center relative z-10">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3c2 2.5 4 5.2 4 8a4 4 0 11-8 0c0-2.8 2-5.5 4-8z" stroke="#8B5A54" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 15.5h7" stroke="#8B5A54" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <span class="font-display italic text-rose-dust text-lg block mt-5">02</span>
+      <h3 class="font-display text-xl mt-1 mb-2">Defina o sabor</h3>
+      <p class="text-ink/65 text-sm leading-relaxed max-w-[230px] mx-auto">
+        Massa e recheio à sua escolha, do clássico ninho com morango ao pistache.
+      </p>
+    </div>
+
+    <div class="fade-scroll relative text-center sm:px-4">
+      <div class="w-[72px] h-[72px] mx-auto rounded-full bg-cream border border-rose-dust flex items-center justify-center relative z-10">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 10-3.6 6.68L20 19l-.85-3.4a7.96 7.96 0 00.85-4.1z" stroke="#8B5A54" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="font-display italic text-rose-dust text-lg block mt-5">03</span>
+      <h3 class="font-display text-xl mt-1 mb-2">Finalize no WhatsApp</h3>
+      <p class="text-ink/65 text-sm leading-relaxed max-w-[230px] mx-auto">
+        Fale com a nossa equipe, confirme os detalhes e garanta a data da sua encomenda.
+      </p>
+    </div>
+  </div>
+
+  <div class="fade-scroll text-center mt-16">
+    <a id="ctaWhatsFinal" href="#" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-ink text-cream text-sm font-semibold px-8 py-4 rounded-full hover:bg-rose-deep transition-colors">
+      Encomendar pelo WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ============ SABORES ============ -->
+<section id="sabores" class="bg-ink text-cream py-24 sm:py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="fade-scroll max-w-xl mb-14">
+      <p class="text-gold tracking-[0.2em] text-xs font-medium mb-3">CARDÁPIO</p>
+      <h2 class="font-display text-3xl sm:text-4xl">Sabores para todos os gostos</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-cream/10 fade-scroll">
+      <div class="bg-ink p-7">
+        <h3 class="font-display italic text-xl mb-2">Ninho com morango</h3>
+        <p class="text-cream/60 text-sm leading-relaxed">Massa amanteigada, creme de leite ninho e recheio de morango fresco.</p>
+      </div>
+      <div class="bg-ink p-7">
+        <h3 class="font-display italic text-xl mb-2">Brigadeiro belga</h3>
+        <p class="text-cream/60 text-sm leading-relaxed">Chocolate belga intenso com camadas generosas de brigadeiro cremoso.</p>
+      </div>
+      <div class="bg-ink p-7">
+        <h3 class="font-display italic text-xl mb-2">Doce de leite com nozes</h3>
+        <p class="text-cream/60 text-sm leading-relaxed">Doce de leite artesanal com crocância de nozes selecionadas.</p>
+      </div>
+      <div class="bg-ink p-7">
+        <h3 class="font-display italic text-xl mb-2">Pistache</h3>
+        <p class="text-cream/60 text-sm leading-relaxed">Massa delicada com creme de pistache, para paladares sofisticados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="max-w-7xl mx-auto px-5 sm:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink/60">
+  <span class="font-display text-lg text-ink">Dapaz Confeitaria</span>
+  <span>© 2026 Dapaz Confeitaria. Todos os direitos reservados.</span>
+</footer>
+
+<!-- ============ WHATSAPP FLUTUANTE ============ -->
+<div class="fixed z-50 right-5 sm:right-7" style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));">
+  <div id="waBubble" class="wa-bubble absolute bottom-[74px] right-0 bg-white text-ink text-sm font-medium px-4 py-2.5 rounded-2xl rounded-br-sm shadow-lg whitespace-nowrap">
+    Peça seu orçamento! 🍰
+  </div>
+  <a id="waFloatBtn" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"
+     class="wa-pulse relative w-14 h-14 rounded-full bg-[#3FBE64] flex items-center justify-center shadow-xl hover:brightness-95 transition">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.87 9.87 0 004.71 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.01c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.13-4.9-4.32-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.21 1.36.28.14.44.12.61-.07.16-.19.7-.81.89-1.09.19-.28.38-.23.63-.14.26.09 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+</div>
+
+<script>
+(function () {
+  // ---------- Header scroll state ----------
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 24) {
+      header.classList.add('shadow-sm', 'border-ink/10', 'bg-cream/95');
+    } else {
+      header.classList.remove('shadow-sm', 'border-ink/10', 'bg-cream/95');
+    }
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- Mobile menu ----------
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+  menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    menuToggle.setAttribute('aria-expanded', String(menuOpen));
+    if (menuOpen) {
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+    } else {
+      mobileMenu.style.maxHeight = '0px';
+      mobileMenu.style.opacity = '0';
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuOpen = false;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.style.maxHeight = '0px';
+    mobileMenu.style.opacity = '0';
+  }));
+
+  // ---------- Hero carousel ----------
+  const slides = Array.from(document.querySelectorAll('.hero-slide'));
+  const dots = Array.from(document.querySelectorAll('.hero-dot'));
+  let current = 0;
+  let timer;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+  function startAutoplay() { timer = setInterval(next, 5500); }
+  function resetAutoplay() { clearInterval(timer); startAutoplay(); }
+
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetAutoplay(); }));
+  document.getElementById('heroNext').addEventListener('click', () => { next(); resetAutoplay(); });
+  document.getElementById('heroPrev').addEventListener('click', () => { prev(); resetAutoplay(); });
+  startAutoplay();
+
+  // ---------- Gallery data + render ----------
+  const cakes = [
+    { cat: 'infantil', title: 'Gabriel, 6 anos', desc: 'Bolo temático do Stitch com acabamento azul e detalhes tropicais.', image: 'img/stitc.jpeg' },
+    { cat: 'infantil', title: 'Mirella, 7 anos', desc: 'Decoração colorida do Stitch com corações e acabamento delicado.', image: 'img/sti.jpeg' },
+    { cat: 'infantil', title: 'Clara, 3 anos', desc: 'Bolo inspirado em Monstros S.A., com cores vibrantes e personagens.', image: 'img/mons.jpeg' },
+    { cat: 'aniversario', title: 'Alícia, 3 meses', desc: 'Bolo do Ursinho Pooh com abelhinhas e acabamento texturizado.', image: 'img/poo.jpeg' },
+    { cat: 'aniversario', title: 'Olívia, 2 meses', desc: 'Decoração delicada com flores e detalhes dourados.', image: 'img/nossa.jpeg' },
+    { cat: 'infantil', title: 'Detalhes que encantam', desc: 'Modelagem artesanal e personagens para celebrar cada fase.', image: 'img/stitc.jpeg' },
+    { cat: 'infantil', title: 'Uma festa azul', desc: 'Camadas texturizadas e decoração personalizada.', image: 'img/sti.jpeg' },
+    { cat: 'infantil', title: 'Tema divertido', desc: 'Cores alegres e personagens feitos para a comemoração.', image: 'img/mons.jpeg' },
+    { cat: 'aniversario', title: 'Celebração especial', desc: 'Composição personalizada para um momento inesquecível.', image: 'img/poo.jpeg' },
+  ];
+
+  const grid = document.getElementById('galleryGrid');
+  function cardTemplate(c) {
+    return `
+      <article class="gallery-card group relative rounded-2xl overflow-hidden aspect-square" data-cat="${c.cat}" tabindex="0">
+        <img class="gallery-art absolute inset-0 w-full h-full object-cover" src="${c.image}" alt="${c.title}" loading="lazy">
+        <div class="gallery-overlay absolute inset-0 bg-ink/55 flex flex-col justify-end p-4 sm:p-5">
+          <h3 class="font-display italic text-white text-lg sm:text-xl">${c.title}</h3>
+          <p class="text-white/80 text-xs sm:text-sm mt-1 leading-snug">${c.desc}</p>
+        </div>
+      </article>`;
+  }
+  grid.innerHTML = cakes.map(cardTemplate).join('');
+
+  const pills = Array.from(document.querySelectorAll('.filter-pill'));
+  pills.forEach(p => p.classList.add('text-sm', 'px-4', 'py-2', 'rounded-full', 'border', 'border-ink/15', 'text-ink/70', 'hover:border-ink/40', 'transition-colors'));
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.setAttribute('aria-pressed', 'false'));
+      pill.setAttribute('aria-pressed', 'true');
+      const filter = pill.dataset.filter;
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        const show = filter === 'todos' || card.dataset.cat === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // ---------- Instagram tiles ----------
+  const igGrid = document.querySelector('section.bg-rose-deep\\/5 .grid');
+  const igImages = ['img/stitc.jpeg', 'img/sti.jpeg', 'img/poo.jpeg', 'img/nossa.jpeg', 'img/mons.jpeg', 'img/stitc.jpeg'];
+  igGrid.innerHTML = igImages.map((image, index) => `
+    <div class="aspect-square rounded-lg relative overflow-hidden">
+      <img class="absolute inset-0 w-full h-full object-cover" src="${image}" alt="Bolo personalizado ${index + 1}" loading="lazy">
+      <svg class="absolute bottom-2 right-2 opacity-70" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.6"/>
+        <circle cx="17.2" cy="6.8" r="1" fill="white"/>
+      </svg>
+    </div>`).join('');
+
+  // ---------- WhatsApp ----------
+  const WA_NUMBER = '551195179052';
+  const WA_MESSAGE = encodeURIComponent('Olá! Gostaria de um orçamento para um bolo personalizado 🍰');
+  const waLink = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
+  document.getElementById('waFloatBtn').href = waLink;
+  document.getElementById('ctaWhatsFinal').href = waLink;
+
+  const waBubble = document.getElementById('waBubble');
+  setTimeout(() => waBubble.classList.add('show'), 1400);
+  let bubbleVisible = true;
+  document.getElementById('waFloatBtn').addEventListener('mouseenter', () => waBubble.classList.add('show'));
+  setInterval(() => {
+    bubbleVisible = !bubbleVisible;
+    waBubble.classList.toggle('show', bubbleVisible);
+  }, 8000);
+
+  // ---------- Scroll reveal ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-scroll').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
