@@ -1,0 +1,25 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# Ambiente / segredos
+.env
+.env.*
+!.env.example
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.temp
+
+# Builds / dependências
+node_modules/
+dist/
+build/
+.next/
+out/
+.vercel/
