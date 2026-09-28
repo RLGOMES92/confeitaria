@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+const VERIFY_TOKEN = "dapaz_webhook_2026_9f7k2m";
 const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
 const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -23,12 +23,19 @@ export default async function handler(req, res) {
 }
 
 function verifyWebhook(req, res) {
-  const mode = req.query["hub.mode"];
-  const token = req.query["hub.verify_token"];
+  const mode = String(req.query["hub.mode"] || "");
+  const verifyToken = String(req.query["hub.verify_token"] || "");
   const challenge = req.query["hub.challenge"];
 
-  if (mode === "subscribe" && token === VERIFY_TOKEN && challenge) {
-    return res.status(200).send(challenge);
+  if (
+    mode === "subscribe" &&
+    verifyToken === VERIFY_TOKEN &&
+    challenge !== undefined &&
+    challenge !== null
+  ) {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    return res.end(String(challenge));
   }
 
   return res.sendStatus(403);
@@ -42,7 +49,6 @@ async function receiveWebhook(req, res) {
   try {
     const messages = extractTextMessages(req.body);
 
-    // Process before returning so a serverless runtime does not stop the work early.
     for (const message of messages) {
       await processMessage(message);
     }
@@ -50,7 +56,6 @@ async function receiveWebhook(req, res) {
     return res.sendStatus(200);
   } catch (error) {
     console.error("WhatsApp webhook error:", error);
-    // Meta should receive a 200 once the event was accepted; errors are logged server-side.
     return res.sendStatus(200);
   }
 }
