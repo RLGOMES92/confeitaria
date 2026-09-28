@@ -10,35 +10,46 @@ const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-5-mini";
 const openai = OPENAI_API_KEY ? new OpenAI({ apiKey: OPENAI_API_KEY }) : null;
 
 export default async function handler(req, res) {
-  if (req.method === "GET") {
-    return verifyWebhook(req, res);
-  }
+  try {
+    if (req.method === "GET") {
+      return verifyWebhook(req, res);
+    }
 
-  if (req.method === "POST") {
-    return receiveWebhook(req, res);
-  }
+    if (req.method === "POST") {
+      return receiveWebhook(req, res);
+    }
 
-  res.setHeader("Allow", "GET, POST");
-  return res.status(405).json({ error: "Method not allowed" });
+    res.setHeader("Allow", "GET, POST");
+    return res.status(405).json({ error: "Method not allowed" });
+  } catch (error) {
+    console.error("Webhook handler error:", error);
+    return res.status(500).type("text/plain").send("Error");
+  }
 }
 
 function verifyWebhook(req, res) {
-  const mode = String(req.query["hub.mode"] || "");
-  const verifyToken = String(req.query["hub.verify_token"] || "");
-  const challenge = req.query["hub.challenge"];
+  try {
+    const query = req?.query || {};
+    const mode = query["hub.mode"];
+    const token = query["hub.verify_token"];
+    const challenge = query["hub.challenge"];
 
-  if (
-    mode === "subscribe" &&
-    verifyToken === VERIFY_TOKEN &&
-    challenge !== undefined &&
-    challenge !== null
-  ) {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "text/plain; charset=utf-8");
-    return res.end(String(challenge));
+    if (
+      mode === "subscribe" &&
+      token === VERIFY_TOKEN &&
+      challenge !== undefined &&
+      challenge !== null
+    ) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      return res.end(String(challenge));
+    }
+
+    return res.status(403).type("text/plain").send("Forbidden");
+  } catch (error) {
+    console.error("Webhook verification error:", error);
+    return res.status(500).type("text/plain").send("Error");
   }
-
-  return res.sendStatus(403);
 }
 
 async function receiveWebhook(req, res) {
