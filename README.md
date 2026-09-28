@@ -44,6 +44,18 @@ https://rlgomes92.github.io/confeitaria/
 
 Nenhuma chave de API ou credencial deve ser colocada no código-fonte. Configurações sensíveis devem permanecer em variáveis de ambiente ou no serviço responsável pela integração.
 
+## 🤖 Arquitetura preparada para Agente de IA
+
+O orçamento do site agora usa uma estrutura padronizada com nome, data, evento, quantidade, tema, sabor, observações e origem. Isso prepara o projeto para uma integração futura com **WhatsApp + webhook + OpenAI API**, sem acoplar a inteligência artificial ao front-end.
+
+Fluxo planejado: **Site → WhatsApp → Webhook → Agente de IA → Atendimento humano**.
+
+O agente deve trabalhar somente com informações aprovadas pela Dapaz e nunca inventar preços, disponibilidade, prazos ou confirmações.
+
+Documentação técnica:
+- `docs/whatsapp-quote-schema.json`
+- `docs/whatsapp-agent-flow.md`
+
 ## 📈 Próxima evolução
 
 A próxima fase pode transformar esta vitrine em uma solução completa de **Site + Agente de IA + WhatsApp**, incluindo qualificação de leads, respostas automáticas, coleta de dados do pedido e encaminhamento para atendimento humano.
