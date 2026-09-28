@@ -19,7 +19,7 @@ export function validateQuote(body = {}) {
 
   const errors = [];
   if (quote.nome.length < 2) errors.push('nome');
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(quote.data)) errors.push('data');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(quote.data)) errors.push('data');
   if (!ALLOWED_EVENTS.includes(quote.evento)) errors.push('evento');
   if (!quote.pessoas) errors.push('pessoas');
   if (quote.sabor && !ALLOWED_FLAVORS.includes(quote.sabor)) errors.push('sabor');
@@ -28,7 +28,18 @@ export function validateQuote(body = {}) {
   return { valid: errors.length === 0, errors, quote };
 }
 
+function setCors(res) {
+  const allowedOrigin = process.env.ALLOWED_ORIGIN || 'https://rlgomes92.github.io';
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
 export default async function handler(req, res) {
+  setCors(res);
+
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Método não permitido' });
 
   const { valid, errors, quote } = validateQuote(req.body);
@@ -44,6 +55,7 @@ export default async function handler(req, res) {
       return res.status(503).json({ ok: false, status: 'handoff_required', message: 'Não foi possível responder automaticamente. A equipe deve continuar o atendimento.' });
     }
   }
+
   return res.status(200).json({
     ok: true,
     status: 'received',
