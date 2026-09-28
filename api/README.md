@@ -20,3 +20,7 @@ Fluxo:
 ## Implementação
 
 O projeto atual continua estático e publicado no GitHub Pages. O backend deve ser hospedado separadamente (por exemplo, em uma função serverless), mantendo o site desacoplado da chave da OpenAI.
+
+## Endpoint implementado
+
+A primeira versão de `/api/quote` já valida e normaliza o payload, rejeita métodos diferentes de POST e retorna um objeto de triagem. A integração com OpenAI permanece deliberadamente separada para não expor credenciais nem inventar regras comerciais.
