@@ -141,6 +141,18 @@
 
   #mobileMenu { transition: max-height .4s ease, opacity .3s ease; }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Como faço para pedir um orçamento?","acceptedAnswer":{"@type":"Answer","text":"Preencha o formulário com a data, o tipo de comemoração e os detalhes que já tiver em mente. Ao continuar, você poderá enviar as informações à equipe pelo WhatsApp."}},
+    {"@type":"Question","name":"Posso pedir um bolo com tema personalizado?","acceptedAnswer":{"@type":"Answer","text":"Sim. Conte sua ideia no formulário e, se tiver referências, compartilhe-as na conversa com a equipe para alinhar os detalhes da criação."}},
+    {"@type":"Question","name":"O envio do formulário confirma a encomenda?","acceptedAnswer":{"@type":"Answer","text":"Não. O formulário inicia o contato. A disponibilidade, os detalhes e a confirmação do pedido são tratados diretamente com a equipe."}},
+    {"@type":"Question","name":"E se eu ainda não souber o sabor ou o tema?","acceptedAnswer":{"@type":"Answer","text":"Sem problema. Você pode deixar esses campos em aberto e conversar com a equipe para explorar as possibilidades."}}
+  ]
+}
+</script>
 </head>
 <body class="antialiased">
 
@@ -653,7 +665,7 @@
   const grid = document.getElementById('galleryGrid');
   function cardTemplate(c) {
     return `
-      <article class="gallery-card group relative rounded-2xl overflow-hidden aspect-square cursor-zoom-in" data-cat="${c.cat}" tabindex="0">
+      <article class="gallery-card group relative rounded-2xl overflow-hidden aspect-square cursor-zoom-in" data-cat="${c.cat}" tabindex="0" role="button" aria-label="Ampliar foto: ${c.title}">
         <img class="gallery-art absolute inset-0 w-full h-full object-cover" src="${c.image}" alt="${c.title}" loading="lazy" decoding="async">
         <div class="gallery-overlay absolute inset-0 bg-ink/55 flex flex-col justify-end p-4 sm:p-5">
           <h3 class="font-display italic text-white text-lg sm:text-xl">${c.title}</h3>
@@ -762,6 +774,14 @@
     const message = buildWhatsAppMessage(quote);
     const submitButton = quoteForm.querySelector('button[type="submit"]');
     const originalLabel = submitButton.innerHTML;
+    // Abre a aba durante o clique do usuário para evitar bloqueio de pop-up
+    // enquanto a API prepara a resposta do atendimento.
+    const whatsappWindow = window.open('about:blank', '_blank');
+    if (whatsappWindow) {
+      whatsappWindow.opener = null;
+      whatsappWindow.document.title = 'Preparando seu WhatsApp...';
+      whatsappWindow.document.body.innerHTML = '<p style="font-family:system-ui;padding:24px">Preparando sua mensagem para a Dapaz Confeitaria…</p>';
+    }
     submitButton.disabled = true;
     submitButton.textContent = 'Preparando atendimento...';
 
@@ -779,10 +799,14 @@
         ? '\n\nMensagem inicial do atendimento:\n' + result.agent.text
         : '';
 
-      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message + agentText), '_blank', 'noopener');
+      const destination = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message + agentText);
+      if (whatsappWindow && !whatsappWindow.closed) whatsappWindow.location.href = destination;
+      else window.location.href = destination;
     } catch (error) {
       // Fallback: o WhatsApp continua funcionando mesmo sem o backend.
-      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+      const destination = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
+      if (whatsappWindow && !whatsappWindow.closed) whatsappWindow.location.href = destination;
+      else window.location.href = destination;
     } finally {
       submitButton.disabled = false;
       submitButton.innerHTML = originalLabel;
