@@ -699,7 +699,7 @@
 
   // ---------- Orçamento estruturado ----------
   const quoteForm = document.getElementById('quoteForm');
-  quoteForm.addEventListener('submit', event => {
+  quoteForm.addEventListener('submit', async event => {
     event.preventDefault();
     const data = new FormData(quoteForm);
     const quote = {
@@ -730,8 +730,33 @@
     ].join('\\n');
 
     const message = buildWhatsAppMessage(quote);
+    const submitButton = quoteForm.querySelector('button[type="submit"]');
+    const originalLabel = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Preparando atendimento...';
 
-    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+    try {
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...quote, message })
+      });
+
+      if (!response.ok) throw new Error('API indisponível');
+
+      const result = await response.json();
+      const agentText = result.agent?.text
+        ? '\n\nMensagem inicial do atendimento:\n' + result.agent.text
+        : '';
+
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message + agentText), '_blank', 'noopener');
+    } catch (error) {
+      // Fallback: o WhatsApp continua funcionando mesmo sem o backend.
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalLabel;
+    }
   });
   document.querySelectorAll('[data-wa-intent]').forEach(link => {
     const intent = link.dataset.waIntent;
