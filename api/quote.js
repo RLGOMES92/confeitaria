@@ -34,7 +34,16 @@ export default async function handler(req, res) {
   const { valid, errors, quote } = validateQuote(req.body);
   if (!valid) return res.status(400).json({ ok: false, error: 'Payload inválido', fields: errors });
 
-  // Ponto de integração futuro: gerar contexto e chamar o agente/OpenAI no servidor.
+  const customerMessage = typeof req.body.message === 'string' ? req.body.message.trim().slice(0, 1000) : '';
+  if (customerMessage) {
+    try {
+      const { generateAgentResponse } = await import('./agent.js');
+      const agent = await generateAgentResponse({ quote, input: customerMessage });
+      return res.status(200).json({ ok: true, status: 'agent_response', quote, agent });
+    } catch (error) {
+      return res.status(503).json({ ok: false, status: 'handoff_required', message: 'Não foi possível responder automaticamente. A equipe deve continuar o atendimento.' });
+    }
+  }
   return res.status(200).json({
     ok: true,
     status: 'received',
