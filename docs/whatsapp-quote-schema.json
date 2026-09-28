@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dapaz WhatsApp Quote",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["nome", "data", "evento", "pessoas", "source"],
+  "properties": {
+    "nome": { "type": "string", "minLength": 2 },
+    "data": { "type": "string", "format": "date" },
+    "evento": { "type": "string" },
+    "pessoas": { "type": "string" },
+    "tema": { "type": "string" },
+    "sabor": { "type": "string" },
+    "observacoes": { "type": "string" },
+    "source": { "const": "site-dapaz" }
+  }
+}
