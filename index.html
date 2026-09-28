@@ -736,7 +736,7 @@
     submitButton.textContent = 'Preparando atendimento...';
 
     try {
-      const response = await fetch('/api/quote', {
+      const response = await fetch('https://confeitaria-git-main-rodrigos-projects-5f32f252.vercel.app/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...quote, message })
