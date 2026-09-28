@@ -24,3 +24,10 @@ O projeto atual continua estático e publicado no GitHub Pages. O backend deve s
 ## Endpoint implementado
 
 A primeira versão de `/api/quote` já valida e normaliza o payload, rejeita métodos diferentes de POST e retorna um objeto de triagem. A integração com OpenAI permanece deliberadamente separada para não expor credenciais nem inventar regras comerciais.
+
+
+## Regras do agente
+
+A lógica inicial do agente está em `api/agent.js`. Ela separa as instruções do agente do endpoint HTTP e define o handoff humano para validações comerciais.
+
+A integração com o provedor de IA deve permanecer no servidor e usar variáveis de ambiente. Nenhuma chave deve ser commitada no repositório.
