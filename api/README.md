@@ -1,33 +1,55 @@
 # API do Agente Dapaz
 
-Esta pasta reserva a integração futura do atendimento inteligente.
+Endpoint: `POST /api/quote`.
 
-## Contrato inicial
+## Arquitetura
 
-O endpoint planejado será `POST /api/quote` e receberá o payload documentado em `docs/whatsapp-quote-schema.json`.
+`GitHub Pages → /api/quote → validação → agente → atendimento humano`
 
-Fluxo:
+O site continua estático. A API deve ser publicada separadamente em uma plataforma serverless compatível com Node.js.
 
-`Site → POST /api/quote → validação → contexto do agente → OpenAI API → resposta/triagem → humano`
+## Deploy seguro
+
+1. Crie um projeto apontando para este repositório.
+2. Configure a pasta raiz do projeto conforme a plataforma escolhida.
+3. Configure as variáveis de ambiente **somente no painel da hospedagem**:
+   - `OPENAI_API_KEY`
+   - `OPENAI_MODEL` (opcional; padrão definido no código)
+4. Não publique a chave no GitHub, no HTML ou em JavaScript do navegador.
+5. Após publicar, obtenha a URL pública da API.
+6. Se a API ficar em domínio diferente do GitHub Pages, altere o formulário para usar a URL da API e configure CORS no servidor.
+
+## Teste
+
+Exemplo de requisição:
+
+```bash
+curl -X POST https://SEU-DOMINIO/api/quote \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome":"Cliente",
+    "data":"2026-10-15",
+    "evento":"Aniversário",
+    "pessoas":"21 a 40 pessoas",
+    "tema":"Flores",
+    "sabor":"Ninho com morango",
+    "observacoes":"",
+    "source":"site-dapaz",
+    "message":"Olá, gostaria de um orçamento."
+  }'
+```
 
 ## Segurança
 
-- Nunca colocar `OPENAI_API_KEY` no front-end.
-- Segredos ficam somente em variáveis de ambiente do servidor.
-- Validar e normalizar todos os campos recebidos.
-- Não confirmar preço, disponibilidade ou pedido sem regra/fonte aprovada.
+- A `OPENAI_API_KEY` nunca vai para o front-end.
+- O servidor valida e normaliza os campos.
+- O agente não deve inventar preços, disponibilidade, prazos ou confirmação de pedido.
+- Casos comerciais que exigem confirmação devem seguir para atendimento humano.
+- O fallback do site mantém o WhatsApp funcional se a API estiver indisponível.
 
-## Implementação
+## Arquivos
 
-O projeto atual continua estático e publicado no GitHub Pages. O backend deve ser hospedado separadamente (por exemplo, em uma função serverless), mantendo o site desacoplado da chave da OpenAI.
-
-## Endpoint implementado
-
-A primeira versão de `/api/quote` já valida e normaliza o payload, rejeita métodos diferentes de POST e retorna um objeto de triagem. A integração com OpenAI permanece deliberadamente separada para não expor credenciais nem inventar regras comerciais.
-
-
-## Regras do agente
-
-A lógica inicial do agente está em `api/agent.js`. Ela separa as instruções do agente do endpoint HTTP e define o handoff humano para validações comerciais.
-
-A integração com o provedor de IA deve permanecer no servidor e usar variáveis de ambiente. Nenhuma chave deve ser commitada no repositório.
+- `api/quote.js`: endpoint HTTP.
+- `api/agent.js`: regras e integração com IA.
+- `api/.env.example`: referência das variáveis de ambiente.
+- `docs/whatsapp-quote-schema.json`: contrato do payload.
