@@ -244,6 +244,12 @@
     </div>
   </div>
 
+  <aside id="heroHighlight" aria-live="polite" class="absolute z-10 right-5 sm:right-12 bottom-20 sm:bottom-28 hidden md:block max-w-xs rounded-2xl border border-white/25 bg-ink/35 px-5 py-4 text-white shadow-xl backdrop-blur-md">
+    <p class="text-[10px] uppercase tracking-[0.22em] text-white/75">Destaques do momento</p>
+    <p id="heroHighlightTitle" class="font-display text-xl italic mt-1">Gabriel, 6 anos</p>
+    <p id="heroHighlightDesc" class="text-xs leading-relaxed text-white/80 mt-1">Bolo temático do Stitch com acabamento azul e detalhes tropicais.</p>
+  </aside>
+
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2.5">
     <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
     <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
@@ -624,6 +630,13 @@
   // ---------- Hero carousel ----------
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   const dots = Array.from(document.querySelectorAll('.hero-dot'));
+  const highlightTitle = document.getElementById('heroHighlightTitle');
+  const highlightDesc = document.getElementById('heroHighlightDesc');
+  const heroHighlights = [
+    { title: 'Gabriel, 6 anos', desc: 'Bolo temático do Stitch com acabamento azul e detalhes tropicais.' },
+    { title: 'Mirella, 7 anos', desc: 'Decoração colorida do Stitch com corações e acabamento delicado.' },
+    { title: 'Olívia, 2 meses', desc: 'Uma criação delicada com flores e detalhes dourados.' }
+  ];
   let current = 0;
   let timer;
 
@@ -633,6 +646,8 @@
     current = (index + slides.length) % slides.length;
     slides[current].classList.add('active');
     dots[current].classList.add('active');
+    highlightTitle.textContent = heroHighlights[current].title;
+    highlightDesc.textContent = heroHighlights[current].desc;
   }
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
