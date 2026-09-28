@@ -396,6 +396,69 @@
       Encomendar pelo WhatsApp
     </a>
   </div>
+
+  <div class="fade-scroll mt-20 max-w-4xl mx-auto rounded-[2rem] bg-rose-deep/5 border border-ink/10 p-6 sm:p-10">
+    <div class="max-w-2xl mb-8">
+      <p class="text-rose-deep tracking-[0.2em] text-xs font-medium mb-3">ORÇAMENTO RÁPIDO</p>
+      <h3 class="font-display text-2xl sm:text-3xl">Conte o que você está planejando</h3>
+      <p class="text-ink/60 text-sm leading-relaxed mt-3">Preencha o básico e o WhatsApp já abrirá com uma mensagem organizada para a equipe da Dapaz.</p>
+    </div>
+
+    <form id="quoteForm" class="grid sm:grid-cols-2 gap-4">
+      <label class="block">
+        <span class="text-xs font-semibold text-ink/70">Nome</span>
+        <input name="nome" type="text" autocomplete="name" required placeholder="Seu nome"
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep">
+      </label>
+
+      <label class="block">
+        <span class="text-xs font-semibold text-ink/70">Data da comemoração</span>
+        <input name="data" type="date" required
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep">
+      </label>
+
+      <label class="block">
+        <span class="text-xs font-semibold text-ink/70">Tipo de evento</span>
+        <select name="evento" required
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep">
+          <option value="">Selecione</option>
+          <option>Aniversário</option>
+          <option>Infantil</option>
+          <option>Casamento</option>
+          <option>Data especial</option>
+          <option>Outro</option>
+        </select>
+      </label>
+
+      <label class="block">
+        <span class="text-xs font-semibold text-ink/70">Quantidade de pessoas</span>
+        <select name="pessoas" required
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep">
+          <option value="">Selecione</option>
+          <option>Até 10 pessoas</option>
+          <option>11 a 20 pessoas</option>
+          <option>21 a 40 pessoas</option>
+          <option>41 a 60 pessoas</option>
+          <option>Mais de 60 pessoas</option>
+        </select>
+      </label>
+
+      <label class="block sm:col-span-2">
+        <span class="text-xs font-semibold text-ink/70">Tema ou ideia do bolo</span>
+        <textarea name="tema" rows="3" placeholder="Ex.: tema, cores, personagem ou referência"
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep resize-none"></textarea>
+      </label>
+
+      <div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+        <button type="submit"
+          class="inline-flex items-center justify-center gap-2 bg-ink text-cream text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-rose-deep transition-colors">
+          Continuar pelo WhatsApp
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="text-xs text-ink/50">Sem pagamento pelo site. O pedido é confirmado diretamente com a equipe.</p>
+      </div>
+    </form>
+  </div>
 </section>
 
 <!-- ============ SABORES ============ -->
@@ -615,6 +678,32 @@
   const waLink = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
   document.getElementById('waFloatBtn').href = waLink;
   document.getElementById('ctaWhatsFinal').href = waLink;
+
+  // ---------- Orçamento estruturado ----------
+  const quoteForm = document.getElementById('quoteForm');
+  quoteForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(quoteForm);
+    const nome = data.get('nome');
+    const dataEvento = data.get('data');
+    const evento = data.get('evento');
+    const pessoas = data.get('pessoas');
+    const tema = data.get('tema') || 'Ainda não definido';
+
+    const message = [
+      'Olá! Vim pelo site da Dapaz Confeitaria e gostaria de solicitar um orçamento 🍰',
+      '',
+      'Meu nome: ' + nome,
+      'Data da comemoração: ' + dataEvento.split('-').reverse().join('/'),
+      'Tipo de evento: ' + evento,
+      'Quantidade: ' + pessoas,
+      'Tema/ideia: ' + tema,
+      '',
+      'Gostaria de receber orientações e saber a disponibilidade para essa data.'
+    ].join('\\n');
+
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
+  });
   document.querySelectorAll('[data-wa-intent]').forEach(link => {
     const intent = link.dataset.waIntent;
     const messages = {
