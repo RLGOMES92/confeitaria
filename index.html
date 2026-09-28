@@ -443,9 +443,27 @@
         </select>
       </label>
 
-      <label class="block sm:col-span-2">
+      <label class="block">
+        <span class="text-xs font-semibold text-ink/70">Sabor</span>
+        <select name="sabor"
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep">
+          <option value="">Ainda não definido</option>
+          <option>Ninho com morango</option>
+          <option>Brigadeiro belga</option>
+          <option>Doce de leite com nozes</option>
+          <option>Pistache</option>
+        </select>
+      </label>
+
+      <label class="block">
         <span class="text-xs font-semibold text-ink/70">Tema ou ideia do bolo</span>
         <textarea name="tema" rows="3" placeholder="Ex.: tema, cores, personagem ou referência"
+          class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep resize-none"></textarea>
+      </label>
+
+      <label class="block sm:col-span-2">
+        <span class="text-xs font-semibold text-ink/70">Observações</span>
+        <textarea name="observacoes" rows="3" placeholder="Algum detalhe importante para o seu pedido?"
           class="mt-1.5 w-full rounded-xl border border-ink/10 bg-cream px-4 py-3 text-sm outline-none focus:border-rose-deep resize-none"></textarea>
       </label>
 
@@ -684,23 +702,34 @@
   quoteForm.addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(quoteForm);
-    const nome = data.get('nome');
-    const dataEvento = data.get('data');
-    const evento = data.get('evento');
-    const pessoas = data.get('pessoas');
-    const tema = data.get('tema') || 'Ainda não definido';
+    const quote = {
+      nome: data.get('nome'),
+      data: data.get('data'),
+      evento: data.get('evento'),
+      pessoas: data.get('pessoas'),
+      tema: data.get('tema') || '',
+      sabor: data.get('sabor') || '',
+      observacoes: data.get('observacoes') || '',
+      source: 'site-dapaz'
+    };
 
-    const message = [
+    const buildWhatsAppMessage = (payload) => [
       'Olá! Vim pelo site da Dapaz Confeitaria e gostaria de solicitar um orçamento 🍰',
       '',
-      'Meu nome: ' + nome,
-      'Data da comemoração: ' + dataEvento.split('-').reverse().join('/'),
-      'Tipo de evento: ' + evento,
-      'Quantidade: ' + pessoas,
-      'Tema/ideia: ' + tema,
+      'Meu nome: ' + payload.nome,
+      'Data da comemoração: ' + payload.data.split('-').reverse().join('/'),
+      'Tipo de evento: ' + payload.evento,
+      'Quantidade: ' + payload.pessoas,
+      'Sabor: ' + (payload.sabor || 'Ainda não definido'),
+      'Tema/ideia: ' + (payload.tema || 'Ainda não definido'),
+      'Observações: ' + (payload.observacoes || 'Nenhuma'),
+      '',
+      'Origem: ' + payload.source,
       '',
       'Gostaria de receber orientações e saber a disponibilidade para essa data.'
     ].join('\\n');
+
+    const message = buildWhatsAppMessage(quote);
 
     window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message), '_blank', 'noopener');
   });
