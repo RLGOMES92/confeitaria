@@ -18,6 +18,7 @@
 <meta name="twitter:description" content="Bolos artesanais e personalizados para momentos especiais.">
 <meta name="twitter:image" content="img/stitc.jpeg">
 <link rel="canonical" href="https://rlgomes92.github.io/confeitaria/">
+<link rel="preload" as="image" href="img/stitc.jpeg" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -430,6 +431,7 @@
 <footer class="max-w-7xl mx-auto px-5 sm:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink/60">
   <span class="font-display text-lg text-ink">Dapaz Confeitaria</span>
   <span>© 2026 Dapaz Confeitaria. Todos os direitos reservados.</span>
+  <a href="https://github.com/RLGOMES92" target="_blank" rel="noopener" class="text-ink/50 hover:text-rose-deep transition-colors">Site desenvolvido por Rodrigo Gomes</a>
 </footer>
 
 
@@ -520,6 +522,11 @@
   startAutoplay();
 
   // ---------- Gallery data + render ----------
+  // ==========================================================
+  // GALERIA — para trocar as fotos depois, edite somente esta lista.
+  // image = caminho do arquivo dentro de /img
+  // cat = infantil | aniversario
+  // ==========================================================
   const cakes = [
     { cat: 'infantil', title: 'Gabriel, 6 anos', desc: 'Bolo temático do Stitch com acabamento azul e detalhes tropicais.', image: 'img/stitc.jpeg' },
     { cat: 'infantil', title: 'Mirella, 7 anos', desc: 'Decoração colorida do Stitch com corações e acabamento delicado.', image: 'img/sti.jpeg' },
@@ -590,6 +597,7 @@
 
   // ---------- Instagram tiles ----------
   const igGrid = document.querySelector('section.bg-rose-deep\\/5 .grid');
+  // Fotos provisórias: depois, troque apenas os caminhos abaixo pelas fotos reais.
   const igImages = ['img/stitc.jpeg', 'img/sti.jpeg', 'img/poo.jpeg', 'img/nossa.jpeg', 'img/mons.jpeg', 'img/stitc.jpeg'];
   igGrid.innerHTML = igImages.map((image, index) => `
     <div class="aspect-square rounded-lg relative overflow-hidden">
