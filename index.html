@@ -96,6 +96,11 @@
   .gallery-card:focus-within .gallery-overlay { opacity: 1; transform: translateY(0); }
   .gallery-card:hover .gallery-art { transform: scale(1.06); }
   .gallery-art { transition: transform .6s cubic-bezier(.2,.7,.3,1); }
+  .gallery-card::after { content:''; position:absolute; inset:0; border:1px solid rgba(255,255,255,.08); border-radius:inherit; pointer-events:none; }
+  #imageModal { opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s ease; }
+  #imageModal.open { opacity:1; visibility:visible; }
+  #imageModal img { transform:scale(.96); transition:transform .3s ease; }
+  #imageModal.open img { transform:scale(1); }
 
   .filter-pill[aria-pressed="true"] {
     background: var(--ink);
@@ -208,10 +213,21 @@
       <p class="text-white/90 text-base sm:text-lg max-w-md">
         Criações artesanais e personalizadas para casamentos, aniversários e celebrações que merecem ser inesquecíveis.
       </p>
-      <a href="#como-encomendar"
-         class="inline-flex items-center gap-2 mt-8 bg-white text-ink text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-gold hover:text-white transition-colors">
-        Solicitar orçamento
-      </a>
+      <div class="flex flex-wrap items-center gap-3 mt-8">
+        <a href="#como-encomendar"
+           class="inline-flex items-center gap-2 bg-white text-ink text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-gold hover:text-white transition-colors shadow-lg">
+          Solicitar orçamento
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#galeria" class="inline-flex items-center text-white text-sm font-medium px-4 py-3.5 hover:text-gold transition-colors">
+          Ver trabalhos
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 mt-7 text-[11px] tracking-wide text-white/75">
+        <span>✦ Personalizados</span>
+        <span>✦ Produção artesanal</span>
+        <span>✦ Atendimento pelo WhatsApp</span>
+      </div>
     </div>
   </div>
 
@@ -236,19 +252,38 @@
   <div class="fade-scroll max-w-xl mb-3">
     <p class="text-rose-deep tracking-[0.2em] text-xs font-medium mb-3">NOSSO TRABALHO</p>
     <h2 class="font-display text-3xl sm:text-4xl">Uma galeria de momentos doces</h2>
+    <p class="text-ink/60 text-sm sm:text-base mt-4 max-w-xl leading-relaxed">Alguns dos trabalhos que ajudam a transformar cada comemoração em uma memória ainda mais especial.</p>
   </div>
 
   <div class="fade-scroll flex flex-wrap gap-2.5 mt-9 mb-10">
     <button class="filter-pill" data-filter="todos" aria-pressed="true">Todos</button>
-    <button class="filter-pill" data-filter="casamento" aria-pressed="false">Casamento</button>
-    <button class="filter-pill" data-filter="aniversario" aria-pressed="false">Aniversário</button>
     <button class="filter-pill" data-filter="infantil" aria-pressed="false">Infantil</button>
-    <button class="filter-pill" data-filter="bento" aria-pressed="false">Bento Cakes</button>
-    <button class="filter-pill" data-filter="corporativo" aria-pressed="false">Corporativo</button>
+    <button class="filter-pill" data-filter="aniversario" aria-pressed="false">Aniversário</button>
   </div>
 
   <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
     <!-- cards injected via JS -->
+  </div>
+</section>
+
+<!-- ============ OCASIÕES ============ -->
+<section class="max-w-7xl mx-auto px-5 sm:px-8 pb-24 sm:pb-28">
+  <div class="grid sm:grid-cols-3 gap-4">
+    <article class="fade-scroll rounded-3xl overflow-hidden bg-ink text-cream p-7 sm:p-8">
+      <span class="text-gold text-xs tracking-[0.2em] font-semibold">01 · CELEBRAÇÕES</span>
+      <h3 class="font-display text-2xl mt-4">Aniversários</h3>
+      <p class="text-cream/65 text-sm leading-relaxed mt-2">Bolos temáticos e personalizados para comemorar cada idade com personalidade.</p>
+    </article>
+    <article class="fade-scroll rounded-3xl overflow-hidden border border-ink/10 p-7 sm:p-8">
+      <span class="text-rose-deep text-xs tracking-[0.2em] font-semibold">02 · MOMENTOS</span>
+      <h3 class="font-display text-2xl mt-4">Datas especiais</h3>
+      <p class="text-ink/60 text-sm leading-relaxed mt-2">Criações para transformar encontros, conquistas e momentos importantes em celebração.</p>
+    </article>
+    <article class="fade-scroll rounded-3xl overflow-hidden border border-ink/10 p-7 sm:p-8">
+      <span class="text-rose-deep text-xs tracking-[0.2em] font-semibold">03 · SOB MEDIDA</span>
+      <h3 class="font-display text-2xl mt-4">Seu tema, seu bolo</h3>
+      <p class="text-ink/60 text-sm leading-relaxed mt-2">Você traz a ideia; a Dapaz ajuda a transformar referências em uma criação personalizada.</p>
+    </article>
   </div>
 </section>
 
@@ -398,6 +433,14 @@
 </footer>
 
 
+<!-- ============ IMAGE LIGHTBOX ============ -->
+<div id="imageModal" class="fixed inset-0 z-[100] bg-ink/90 p-4 sm:p-8 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Visualização da foto">
+  <button id="closeImageModal" class="absolute top-5 right-5 sm:top-7 sm:right-7 w-11 h-11 rounded-full bg-white/10 text-white border border-white/20 flex items-center justify-center hover:bg-white/20" aria-label="Fechar imagem">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <img id="modalImage" src="" alt="" class="max-h-[88vh] max-w-[94vw] object-contain rounded-2xl shadow-2xl">
+</div>
+
 <!-- ============ MOBILE CTA ============ -->
 <div class="fixed md:hidden z-40 left-4 right-4 bottom-[5.6rem]" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
   <a href="#" data-wa-intent="mobile" target="_blank" rel="noopener"
@@ -492,7 +535,7 @@
   const grid = document.getElementById('galleryGrid');
   function cardTemplate(c) {
     return `
-      <article class="gallery-card group relative rounded-2xl overflow-hidden aspect-square" data-cat="${c.cat}" tabindex="0">
+      <article class="gallery-card group relative rounded-2xl overflow-hidden aspect-square cursor-zoom-in" data-cat="${c.cat}" tabindex="0">
         <img class="gallery-art absolute inset-0 w-full h-full object-cover" src="${c.image}" alt="${c.title}" loading="lazy" decoding="async">
         <div class="gallery-overlay absolute inset-0 bg-ink/55 flex flex-col justify-end p-4 sm:p-5">
           <h3 class="font-display italic text-white text-lg sm:text-xl">${c.title}</h3>
@@ -501,6 +544,34 @@
       </article>`;
   }
   grid.innerHTML = cakes.map(cardTemplate).join('');
+
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeModal = () => { modal.classList.remove('open'); document.body.style.overflow=''; };
+  document.getElementById('closeImageModal').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.gallery-card');
+    if (!card) return;
+    const img = card.querySelector('img');
+    modalImage.src = img.src;
+    modalImage.alt = img.alt;
+    modal.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+  grid.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const card = e.target.closest('.gallery-card');
+      if (!card) return;
+      e.preventDefault();
+      const img = card.querySelector('img');
+      modalImage.src = img.src;
+      modalImage.alt = img.alt;
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+  });
 
   const pills = Array.from(document.querySelectorAll('.filter-pill'));
   pills.forEach(p => p.classList.add('text-sm', 'px-4', 'py-2', 'rounded-full', 'border', 'border-ink/15', 'text-ink/70', 'hover:border-ink/40', 'transition-colors'));
