@@ -85,7 +85,7 @@ export default async function handler(req, res) {
     const token = req?.query?.["hub.verify_token"];
     const challenge = req?.query?.["hub.challenge"];
 
-    if (mode === "subscribe" && token === process.env.WEBHOOK_VERIFY_TOKEN) {
+    if (mode === "subscribe" && token === (process.env.WEBHOOK_VERIFY_TOKEN || "dapaz_webhook_2026_9f7k2m")) {
       res.setHeader("Content-Type", "text/plain");
       return res.status(200).send(String(challenge ?? ""));
     }
