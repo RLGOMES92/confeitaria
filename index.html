@@ -9,7 +9,8 @@
 <meta name="keywords" content="confeitaria Vila Andrade, bolo personalizado Vila Andrade, bolo de festa Vila Andrade, bolos Morumbi, bolo Panamby, encomenda de bolo São Paulo, DaPaz Confeitaria">
 <meta name="geo.region" content="BR-SP">
 <meta name="geo.placename" content="Vila Andrade, São Paulo">
-\n<meta name="format-detection" content="telephone=no">
+
+<meta name="format-detection" content="telephone=no">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dapaz Confeitaria em Vila Andrade — Bolos Personalizados">
@@ -167,6 +168,7 @@
 </script>
 </head>
 <body class="antialiased">
+<div id="mobile-sales-cta" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;display:none;gap:8px;"><a href="https://rlgomes92.github.io/dapaz/#pote" style="flex:1;text-align:center;background:#8B5A54;color:#fff;padding:13px 16px;border-radius:999px;font-weight:700;box-shadow:0 8px 24px rgba(43,33,29,.22);">🍰 Ver bolos e preços</a><a href="https://wa.me/5511951799052?text=Ol%C3%A1%2C%20vim%20pelo%20site%20DaPaz%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;width:50px;background:#25D366;color:#fff;border-radius:999px;font-size:22px;box-shadow:0 8px 24px rgba(37,211,102,.25);" aria-label="Pedir pelo WhatsApp">◉</a></div><style>@media(max-width:767px){#mobile-sales-cta{display:flex}body{padding-bottom:76px}}</style>
 <div id="local-sales-bar" style="background:#2B211D;color:#FBF6F0;text-align:center;padding:10px 16px;font-size:13px;position:relative;z-index:60;">
   <span>🍰 <strong>DaPaz Confeitaria em Vila Andrade</strong> · bolos personalizados e encomendas</span>
   <a href="https://rlgomes92.github.io/dapaz/#pote" style="display:inline-block;margin-left:10px;background:#D9AFA5;color:#2B211D;padding:6px 12px;border-radius:999px;font-weight:700;">Comprar agora</a>
@@ -185,7 +187,8 @@
         <a href="#inicio" class="hover:text-rose-deep transition-colors">Início</a>
         <a href="#galeria" class="hover:text-rose-deep transition-colors">Galeria</a>
         <a href="#como-encomendar" class="hover:text-rose-deep transition-colors">Como encomendar</a>
-        <a href="#sabores" class="hover:text-rose-deep transition-colors">Sabores</a>\n        <a href="#duvidas" class="hover:text-rose-deep transition-colors">Dúvidas</a>
+        <a href="#sabores" class="hover:text-rose-deep transition-colors">Sabores</a>
+        <a href="#duvidas" class="hover:text-rose-deep transition-colors">Dúvidas</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -208,7 +211,8 @@
       <a href="#inicio" class="py-2.5 border-b border-ink/5">Início</a>
       <a href="#galeria" class="py-2.5 border-b border-ink/5">Galeria</a>
       <a href="#como-encomendar" class="py-2.5 border-b border-ink/5">Como encomendar</a>
-      <a href="#sabores" class="py-2.5 border-b border-ink/5">Sabores</a>\n      <a href="#duvidas" class="py-2.5 border-b border-ink/5">Dúvidas</a>
+      <a href="#sabores" class="py-2.5 border-b border-ink/5">Sabores</a>
+      <a href="#duvidas" class="py-2.5 border-b border-ink/5">Dúvidas</a>
       <a href="#como-encomendar" class="mt-3 text-center bg-ink text-cream rounded-full py-3 font-medium">Encomendar agora</a>
     </div>
   </nav>
@@ -800,7 +804,8 @@
       'Origem: ' + payload.source,
       '',
       'Gostaria de receber orientações e saber a disponibilidade para essa data.'
-    ].join('\\n');
+    ].join('\
+');
 
     const message = buildWhatsAppMessage(quote);
     const submitButton = quoteForm.querySelector('button[type="submit"]');
@@ -827,7 +832,10 @@
 
       const result = await response.json();
       const agentText = result.agent?.text
-        ? '\n\nMensagem inicial do atendimento:\n' + result.agent.text
+        ? '
+
+Mensagem inicial do atendimento:
+' + result.agent.text
         : '';
 
       const destination = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message + agentText);
