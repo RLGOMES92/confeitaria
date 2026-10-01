@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://rlgomes92.github.io/confeitaria/sitemap.xml
