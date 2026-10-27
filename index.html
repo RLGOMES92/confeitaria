@@ -802,8 +802,7 @@ window.trackDapazEvent=function(name,params){try{if(typeof window.gtag==='functi
       'Origem: ' + payload.source,
       '',
       'Gostaria de receber orientações e saber a disponibilidade para essa data.'
-    ].join('\
-');
+    ].join('\n');
 
     const message = buildWhatsAppMessage(quote);
     const submitButton = quoteForm.querySelector('button[type="submit"]');
