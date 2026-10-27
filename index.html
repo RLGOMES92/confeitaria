@@ -830,10 +830,7 @@ window.trackDapazEvent=function(name,params){try{if(typeof window.gtag==='functi
 
       const result = await response.json();
       const agentText = result.agent?.text
-        ? '
-
-Mensagem inicial do atendimento:
-' + result.agent.text
+        ? '\n\nMensagem inicial do atendimento:\n' + result.agent.text
         : '';
 
       const destination = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message + agentText);
