@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBF6F0">
 <meta name="keywords" content="DaPaz Confeitaria, confeitaria artesanal, bolo personalizado, bolo de aniversário, bolo de festa, bolos decorados, doces personalizados, encomenda de bolo, confeitaria em São Paulo">
 <meta name="geo.region" content="BR-SP">
-<meta name="geo.placename" content="Vila Andrade, São Paulo">
+<meta name="geo.placename" content="São Paulo">
 
 <meta name="format-detection" content="telephone=no">
 <meta name="robots" content="index, follow">
@@ -166,7 +166,7 @@ window.trackDapazEvent=function(name,params){try{if(typeof window.gtag==='functi
 <body class="antialiased">
 <div id="mobile-sales-cta" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;display:none;gap:8px;"><a href="https://rlgomes92.github.io/dapaz/?utm_source=confeitaria&utm_medium=organic&utm_campaign=site_institucional#pote" style="flex:1;text-align:center;background:#8B5A54;color:#fff;padding:13px 16px;border-radius:999px;font-weight:700;box-shadow:0 8px 24px rgba(43,33,29,.22);">🍰 Ver bolos e preços</a><a href="https://wa.me/5511951799052?text=Ol%C3%A1%2C%20vim%20pelo%20site%20DaPaz%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;width:50px;background:#25D366;color:#fff;border-radius:999px;font-size:22px;box-shadow:0 8px 24px rgba(37,211,102,.25);" aria-label="Pedir pelo WhatsApp">◉</a></div><style>@media(max-width:767px){#mobile-sales-cta{display:flex}body{padding-bottom:76px}}</style>
 <div id="local-sales-bar" style="background:#2B211D;color:#FBF6F0;text-align:center;padding:10px 16px;font-size:13px;position:relative;z-index:60;">
-  <span>🍰 <strong>DaPaz Confeitaria em Vila Andrade</strong> · bolos personalizados e encomendas</span>
+  <span>🍰 <strong>DaPaz Confeitaria</strong> · bolos personalizados e encomendas em São Paulo</span>
   <a href="https://rlgomes92.github.io/dapaz/?utm_source=confeitaria&utm_medium=organic&utm_campaign=site_institucional#pote" style="display:inline-block;margin-left:10px;background:#D9AFA5;color:#2B211D;padding:6px 12px;border-radius:999px;font-weight:700;">Comprar agora</a>
 </div>
 
@@ -766,13 +766,15 @@ window.trackDapazEvent=function(name,params){try{if(typeof window.gtag==='functi
   // ---------- WhatsApp ----------
   const WA_NUMBER = '5511951799052';
   const WA_MESSAGE = encodeURIComponent('Olá! Vim pelo site da Dapaz Confeitaria e gostaria de um orçamento para um bolo personalizado 🍰');
-  const waLink = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;\n  window.trackDapazEvent('view_item_list',{list_name:'site_institucional'});
+  const waLink = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
+  window.trackDapazEvent('view_item_list',{list_name:'site_institucional'});
   document.getElementById('waFloatBtn').href = waLink;
   document.getElementById('ctaWhatsFinal').href = waLink;
 
   // ---------- Orçamento estruturado ----------
   const quoteForm = document.getElementById('quoteForm');
-  quoteForm.addEventListener('submit', async event => {\n    window.trackDapazEvent('generate_lead',{lead_type:'quote_form',source:'confeitaria'});
+  quoteForm.addEventListener('submit', async event => {
+    window.trackDapazEvent('generate_lead',{lead_type:'quote_form',source:'confeitaria'});
     event.preventDefault();
     const data = new FormData(quoteForm);
     const quote = {
@@ -853,7 +855,8 @@ Mensagem inicial do atendimento:
       planejar: 'Olá! Vim pelo site da Dapaz Confeitaria e quero planejar um bolo personalizado para uma celebração 🍰',
       mobile: 'Olá! Vim pelo site da Dapaz Confeitaria e gostaria de solicitar um orçamento 🍰'
     };
-    link.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(messages[intent] || 'Olá! Vim pelo site da Dapaz Confeitaria e gostaria de um orçamento 🍰')}`;\n    link.addEventListener('click', () => window.trackDapazEvent('contact',{method:'whatsapp',intent:intent||'default'}));
+    link.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(messages[intent] || 'Olá! Vim pelo site da Dapaz Confeitaria e gostaria de um orçamento 🍰')}`;
+    link.addEventListener('click', () => window.trackDapazEvent('contact',{method:'whatsapp',intent:intent||'default'}));
   });
 
   const waBubble = document.getElementById('waBubble');
