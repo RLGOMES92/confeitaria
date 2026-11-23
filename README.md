@@ -141,3 +141,13 @@ Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a UR
 
 ### Critério de lançamento
 A DaPaz só será marcada como pronta quando o caminho completo for testado: **visitante → produto/formulário → WhatsApp → atendimento → orçamento confirmado por pessoa → encomenda**. A publicação do código não substitui testes de produção.
+
+
+## 🔎 Status verificado na hospedagem (23/11/2026)
+
+- Projeto Vercel `confeitaria`: existe e está conectado ao repositório.
+- Domínio de produção verificado: `confeitaria-three-rose.vercel.app`.
+- O endpoint do formulário usa o domínio estável de produção, evitando URL específica de deployment/branch.
+- A lista de variáveis de ambiente retornou vazia na verificação; portanto, a IA e o webhook não devem ser considerados operacionais até que as credenciais necessárias sejam configuradas e testadas.
+- Não registrar, copiar ou publicar tokens/segredos no README ou Git.
+- Deploys recentes podem estar em construção; confirme estado READY antes de considerar as alterações publicadas.
