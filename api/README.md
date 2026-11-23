@@ -1,57 +1,42 @@
-# API do Agente Dapaz
+# API da DaPaz Confeitaria
 
-Endpoint: `POST /api/quote`.
+A API serverless é implantada junto deste repositório na Vercel, a partir da pasta raiz. Endpoints: `/api/quote` e `/api/webhook`.
 
-## Arquitetura
+## Configuração de produção
 
-`GitHub Pages → /api/quote → validação → agente → atendimento humano`
+Na Vercel, abra **Project → Settings → Environment Variables** e configure:
 
-O site continua estático. A API deve ser publicada separadamente em uma plataforma serverless compatível com Node.js.
+- `OPENAI_API_KEY`: chave da API OpenAI.
+- `OPENAI_MODEL`: modelo habilitado na conta (opcional).
+- `PHONE_NUMBER_ID`: ID numérico do WhatsApp Cloud API.
+- `WHATSAPP_TOKEN`: token de acesso da Meta.
+- `WEBHOOK_VERIFY_TOKEN`: string aleatória forte, usada na validação GET.
+- `META_APP_SECRET`: App Secret da Meta, para validar assinatura HMAC SHA-256 de POST.
+- `ALLOWED_ORIGIN`: origem autorizada para API de orçamento, normalmente `https://rlgomes92.github.io`.
 
-## Deploy seguro
+Não coloque credenciais no Git, HTML, mensagens ou screenshots. Depois de cadastrar/alterar variáveis, faça redeploy.
 
-1. Crie um projeto apontando para este repositório.
-2. Configure a pasta raiz do projeto conforme a plataforma escolhida.
-3. Configure as variáveis de ambiente **somente no painel da hospedagem**:
-   - `OPENAI_API_KEY`
-   - `OPENAI_MODEL` (opcional; padrão definido no código)
-   - `META_APP_SECRET` (segredo do app Meta, usado para validar a assinatura SHA-256 dos POSTs)
-   - `WEBHOOK_VERIFY_TOKEN` (token aleatório definido por você e usado na validação GET da Meta)
-4. Não publique a chave no GitHub, no HTML ou em JavaScript do navegador.
-5. Após publicar, obtenha a URL pública da API.
-6. Se a API ficar em domínio diferente do GitHub Pages, altere o formulário para usar a URL da API e configure CORS no servidor.
+## Configurar webhook Meta
 
-## Teste
+1. URL callback: `https://confeitaria-three-rose.vercel.app/api/webhook`.
+2. Método de verificação: token definido em `WEBHOOK_VERIFY_TOKEN`.
+3. Inscreva o campo `messages` no webhook da aplicação.
+4. O POST exige `META_APP_SECRET` e uma assinatura válida em `X-Hub-Signature-256`.
+5. Envie mensagem de teste a partir de um número autorizado e confira logs de função Vercel.
 
-Exemplo de requisição:
+## Comportamento
 
-```bash
-curl -X POST https://SEU-DOMINIO/api/quote \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nome":"Cliente",
-    "data":"2026-10-15",
-    "evento":"Aniversário",
-    "pessoas":"21 a 40 pessoas",
-    "tema":"Flores",
-    "sabor":"Ninho com morango",
-    "observacoes":"",
-    "source":"site-dapaz",
-    "message":"Olá, gostaria de um orçamento."
-  }'
-```
+- Mensagens texto recebem resposta gerada pela OpenAI (ou fallback quando não há chave).
+- Mensagens de outros tipos recebem orientação para enviar texto.
+- Notificações de status sem mensagens são ignoradas.
+- Erros de processamento retornam 500 para permitir tentativa da Meta.
+- A API não confirma encomendas, preços ou disponibilidade.
 
-## Segurança
+## Limitações não resolvidas
 
-- A `OPENAI_API_KEY` nunca vai para o front-end.
-- O servidor valida e normaliza os campos.
-- O agente não deve inventar preços, disponibilidade, prazos ou confirmação de pedido.
-- Casos comerciais que exigem confirmação devem seguir para atendimento humano.
-- O fallback do site mantém o WhatsApp funcional se a API estiver indisponível.
+- Não há armazenamento de histórico persistente de conversas.
+- Não há deduplicação durável de eventos da Meta.
+- Não há catálogo de produtos, preço, agenda, cálculo de entrega ou controle de estoque.
+- Não há encaminhamento automático/alerta para atendente humano.
+- Credenciais externas são necessárias para teste ponta a ponta.
 
-## Arquivos
-
-- `api/quote.js`: endpoint HTTP.
-- `api/agent.js`: regras e integração com IA.
-- `api/.env.example`: referência das variáveis de ambiente.
-- `docs/whatsapp-quote-schema.json`: contrato do payload.
