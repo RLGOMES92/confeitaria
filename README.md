@@ -96,3 +96,48 @@ Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a UR
 - O webhook trata mensagens de texto; outros tipos recebem uma orientação para enviar texto.
 - A validação de assinatura das notificações POST da Meta ainda precisa ser implementada antes de considerar a integração endurecida para produção.
 - A integração depende de credenciais válidas e de testes reais no ambiente publicado. O commit do código, por si só, não comprova que o serviço está operacional.
+
+---
+
+## 🎯 Plano de crescimento e finalização — Nov/2026
+
+### Fase 1 — Conversão do site
+- [ ] Revisar site em dispositivos móveis e desktop.
+- [ ] Conferir CTAs e links de WhatsApp em todas as seções.
+- [ ] Confirmar número de contato e Instagram.
+- [ ] Conferir imagens, textos, catálogo, sabores e preços; não publicar valores sem validação da confeitaria.
+- [ ] Testar formulário e fluxo de fallback para WhatsApp.
+- [ ] Revisar acessibilidade, velocidade e erros de console.
+
+### Fase 2 — SEO e presença local
+- [x] `robots.txt` aponta para `sitemap.xml`.
+- [x] Sitemap XML existe no repositório.
+- [ ] Validar sitemap publicado e reenviar no Search Console.
+- [ ] Confirmar indexação e corrigir problemas reportados.
+- [ ] Completar/atualizar Google Business Profile com fotos reais, produtos, horário e link de pedido.
+- [ ] Solicitar avaliações honestas a clientes após entregas.
+
+### Fase 3 — Atendimento WhatsApp
+- [ ] Confirmar webhook e variáveis no ambiente de produção.
+- [ ] Testar mensagem recebida e resposta enviada com número real.
+- [ ] Confirmar logs e tratamento de falhas.
+- [ ] Proteger endpoint com validação de assinatura Meta e controles contra duplicidade.
+- [ ] Definir fallback claro para atendimento humano.
+
+### Fase 4 — Aura IA e catálogo
+- [ ] Unificar regras de atendimento entre webhook e endpoint de orçamento.
+- [ ] Criar catálogo oficial (produtos, sabores, tamanhos, preços, prazo, retirada/entrega).
+- [ ] Implementar coleta conversacional dos dados do pedido.
+- [ ] Não inventar preço, prazo, disponibilidade ou confirmação.
+- [ ] Preparar resumo de pedido e transferência para pessoa responsável.
+- [ ] Testar cenários de conversa e casos de erro.
+
+### Fase 5 — Aquisição e retenção
+- [ ] Planejar conteúdo semanal com fotos reais, bastidores, produtos, temas e depoimentos.
+- [ ] Usar links de WhatsApp com mensagens de entrada claras.
+- [ ] Registrar origem dos contatos (Google, Instagram, indicação, site).
+- [ ] Acompanhar métricas: cliques no WhatsApp, pedidos de orçamento, encomendas fechadas, avaliações e produtos mais procurados.
+- [ ] Criar rotina de pós-venda e pedido de avaliação.
+
+### Critério de lançamento
+A DaPaz só será marcada como pronta quando o caminho completo for testado: **visitante → produto/formulário → WhatsApp → atendimento → orçamento confirmado por pessoa → encomenda**. A publicação do código não substitui testes de produção.
