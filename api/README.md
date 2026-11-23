@@ -15,6 +15,8 @@ O site continua estático. A API deve ser publicada separadamente em uma platafo
 3. Configure as variáveis de ambiente **somente no painel da hospedagem**:
    - `OPENAI_API_KEY`
    - `OPENAI_MODEL` (opcional; padrão definido no código)
+   - `META_APP_SECRET` (segredo do app Meta, usado para validar a assinatura SHA-256 dos POSTs)
+   - `WEBHOOK_VERIFY_TOKEN` (token aleatório definido por você e usado na validação GET da Meta)
 4. Não publique a chave no GitHub, no HTML ou em JavaScript do navegador.
 5. Após publicar, obtenha a URL pública da API.
 6. Se a API ficar em domínio diferente do GitHub Pages, altere o formulário para usar a URL da API e configure CORS no servidor.
