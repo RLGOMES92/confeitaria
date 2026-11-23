@@ -27,7 +27,7 @@ export async function generateAgentResponse({ quote, knowledge = {}, input }) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY não configurada no servidor.');
 
-  const model = process.env.OPENAI_MODEL || 'gpt-5-mini';
+  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
   const context = buildAgentContext(quote, knowledge);
 
   const response = await fetch('https://api.openai.com/v1/responses', {
