@@ -85,16 +85,18 @@ Configure no painel da Vercel (Settings → Environment Variables), sem inserir 
 | `PHONE_NUMBER_ID` | ID do número de telefone no WhatsApp Cloud API (não é o número de telefone comum). |
 | `WHATSAPP_TOKEN` | Token de acesso da API do WhatsApp. |
 | `OPENAI_API_KEY` | Chave da API da OpenAI para gerar respostas. |
-| `WEBHOOK_VERIFY_TOKEN` | Token usado na verificação GET. Se não for definido, o código usa o token de compatibilidade já existente. |
+| `WEBHOOK_VERIFY_TOKEN` | Token secreto configurado também no painel da Meta para verificação GET. Não há mais token padrão no código. |
+| `META_APP_SECRET` | App Secret da Meta usado para validar a assinatura SHA-256 das requisições POST. |
 
-Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a URL pública do endpoint `/api/webhook` e o mesmo token de verificação.
+Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a URL pública do endpoint `/api/webhook` e o mesmo token de verificação. O POST só será aceito com `META_APP_SECRET` configurado.
 
 ### Limitações atuais
 
 - A conversa ainda não mantém histórico entre mensagens.
 - O agente não consulta catálogo, preços ou agenda da confeitaria; forneça apenas dados aprovados antes de habilitar respostas comerciais específicas.
 - O webhook trata mensagens de texto; outros tipos recebem uma orientação para enviar texto.
-- A validação de assinatura das notificações POST da Meta ainda precisa ser implementada antes de considerar a integração endurecida para produção.
+- O webhook agora valida `X-Hub-Signature-256` com `META_APP_SECRET`; POSTs sem segredo configurado são recusados.
+- A memória de conversas e deduplicação durável de eventos ainda não foram implementadas; exigem armazenamento externo.
 - A integração depende de credenciais válidas e de testes reais no ambiente publicado. O commit do código, por si só, não comprova que o serviço está operacional.
 
 ---
