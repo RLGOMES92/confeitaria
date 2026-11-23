@@ -19,8 +19,15 @@ export function validateQuote(body = {}) {
 
   const errors = [];
   if (quote.nome.length < 2) errors.push('nome');
-  const parsedDate = new Date(quote.data + 'T00:00:00Z');
-  const dateIsValid = /^\d{4}-\d{2}-\d{2}$/.test(quote.data) && parsedDate.toISOString().slice(0, 10) === quote.data;
+  const dateMatch = quote.data.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  let dateIsValid = false;
+  if (dateMatch) {
+    const [, year, month, day] = dateMatch.map(Number);
+    const normalized = new Date(Date.UTC(year, month - 1, day));
+    dateIsValid = normalized.getUTCFullYear() === year
+      && normalized.getUTCMonth() === month - 1
+      && normalized.getUTCDate() === day;
+  }
   const brazilToday = new Intl.DateTimeFormat('sv-SE', { timeZone: 'America/Sao_Paulo' }).format(new Date());
   if (!dateIsValid || quote.data < brazilToday) errors.push('data');
   if (!ALLOWED_EVENTS.includes(quote.evento)) errors.push('evento');
