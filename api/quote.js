@@ -19,7 +19,10 @@ export function validateQuote(body = {}) {
 
   const errors = [];
   if (quote.nome.length < 2) errors.push('nome');
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(quote.data)) errors.push('data');
+  const parsedDate = new Date(quote.data + 'T00:00:00Z');
+  const dateIsValid = /^\d{4}-\d{2}-\d{2}$/.test(quote.data) && parsedDate.toISOString().slice(0, 10) === quote.data;
+  const brazilToday = new Intl.DateTimeFormat('sv-SE', { timeZone: 'America/Sao_Paulo' }).format(new Date());
+  if (!dateIsValid || quote.data < brazilToday) errors.push('data');
   if (!ALLOWED_EVENTS.includes(quote.evento)) errors.push('evento');
   if (!quote.pessoas) errors.push('pessoas');
   if (quote.sabor && !ALLOWED_FLAVORS.includes(quote.sabor)) errors.push('sabor');
