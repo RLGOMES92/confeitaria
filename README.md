@@ -70,7 +70,7 @@ Instagram: https://www.instagram.com/rodrigo_ligomes/
 
 ## ⚙️ Webhook do WhatsApp (Vercel)
 
-O endpoint serverless está em `api/webhook.js` e oferece:
+O endpoint serverless publicado na Vercel está em `api/webhook.js` e oferece:
 - Verificação GET do webhook da Meta.
 - Recebimento de mensagens de texto via POST.
 - Respostas geradas pela OpenAI quando `OPENAI_API_KEY` está configurada.
@@ -88,14 +88,14 @@ Configure no painel da Vercel (Settings → Environment Variables), sem inserir 
 | `WEBHOOK_VERIFY_TOKEN` | Token secreto configurado também no painel da Meta para verificação GET. Não há mais token padrão no código. |
 | `META_APP_SECRET` | App Secret da Meta usado para validar a assinatura SHA-256 das requisições POST. |
 
-Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a URL pública do endpoint `/api/webhook` e o mesmo token de verificação. O POST só será aceito com `META_APP_SECRET` configurado.
+Após alterar variáveis, faça um novo deploy na Vercel. Configure na Meta a URL pública do endpoint `/api/webhook` e o mesmo token de verificação. Inscreva o campo `messages`. O POST só será aceito com `META_APP_SECRET` configurado.
 
 ### Limitações atuais
 
 - A conversa ainda não mantém histórico entre mensagens.
 - O agente não consulta catálogo, preços ou agenda da confeitaria; forneça apenas dados aprovados antes de habilitar respostas comerciais específicas.
 - O webhook trata mensagens de texto; outros tipos recebem uma orientação para enviar texto.
-- O webhook agora valida `X-Hub-Signature-256` com `META_APP_SECRET`; POSTs sem segredo configurado são recusados.
+- O webhook valida `X-Hub-Signature-256` com `META_APP_SECRET`; POSTs sem segredo configurado são recusados.
 - A memória de conversas e deduplicação durável de eventos ainda não foram implementadas; exigem armazenamento externo.
 - A integração depende de credenciais válidas e de testes reais no ambiente publicado. O commit do código, por si só, não comprova que o serviço está operacional.
 
