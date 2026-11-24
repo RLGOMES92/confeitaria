@@ -141,6 +141,19 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
 .flavor p{color:#786b70}
 @media(max-width:680px){.flavors{background:#f3e9ef}.flavor{background:#fffaf8}}
 
+
+/* DaPaz: nome centralizado com brilho neon suave e flutuação discreta */
+.brand{align-items:center;text-align:center}
+.brand-name{
+  color:#a83f68;
+  text-shadow:0 0 5px #ffc4d8,0 0 12px #f3a2c0,0 0 22px #e7a8ff80;
+  animation:dapaz-logo-float 3.8s ease-in-out infinite,dapaz-logo-glow 2.8s ease-in-out infinite alternate;
+}
+.brand-sub{text-align:center}
+@keyframes dapaz-logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes dapaz-logo-glow{from{text-shadow:0 0 4px #ffc4d8,0 0 9px #f3a2c0,0 0 16px #e7a8ff60}to{text-shadow:0 0 7px #ffc4d8,0 0 16px #f08ab2,0 0 26px #d7a2ffb0}}
+@media(prefers-reduced-motion:reduce){.brand-name{animation:none}}
+
 </style>
 </head>
 <body>
