@@ -31,42 +31,112 @@
 @media(max-width:680px){.wrap{width:min(100% - 32px,560px)}.header-inner{height:66px}.nav,.header-cta{display:none}.menu-btn{display:block}.mobile-nav{display:none;padding:4px 16px 16px;border-top:1px solid var(--line)}.mobile-nav.open{display:grid;gap:3px}.mobile-nav a{padding:12px 5px;font-size:14px;border-bottom:1px solid #eee7e2}.hero{padding:18px 0 42px}.hero-grid{display:flex;flex-direction:column-reverse;gap:22px;min-height:0}.hero-photo{height:390px;min-height:0;width:100%}.hero-photo>img{border-radius:3px 90px 3px 3px}.photo-note{left:12px;bottom:12px;padding:12px 15px;max-width:190px}.photo-note strong{font-size:17px}.hero-copy{padding:0}.hero h1{font-size:42px}.hero-text{font-size:14px;margin:15px 0 21px;line-height:1.7}.hero-actions .btn{flex:1}.trustline{margin-top:19px}.section{padding:52px 0}.section-head{display:block;margin-bottom:21px}.section-head p{margin-top:12px}.gallery{grid-template-columns:repeat(2,1fr);gap:10px}.gallery-card img{aspect-ratio:1/1}.gallery-info{padding:11px 12px 14px}.gallery-info strong{font-size:16px}.gallery-info span{font-size:11px}.banner{padding:48px 0}.banner-grid{grid-template-columns:1fr;gap:22px}.banner-img{height:300px}.banner-copy{order:-1}.feature-row{gap:8px}.feature{padding:12px 8px}.feature b{font-size:15px}.feature p{font-size:10px}.flavors{padding:48px 0}.flavor{padding:16px}.flavor h3{font-size:17px}.flavor p{font-size:11px}.order{padding:52px 0}.order-copy h2{font-size:34px}.form-card{padding:19px}.form-card h3{font-size:24px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.faq{padding:48px 0}.faq details{padding:15px}.instagram{padding:42px 0}.instagram h2{font-size:28px}.footer-inner{flex-direction:column;text-align:center;gap:9px}.hero-actions{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 
-/* Ajustes finais DaPaz: identidade suave e alinhamento central */
-.header-inner{position:relative;justify-content:center}
-.brand{align-items:center;text-align:center}
-.nav{position:absolute;right:0}
+/* Color-rich visual refinement */
+:root{--bg:#fff8f4;--paper:#fff;--ink:#38232d;--muted:#78636c;--rose:#e76f83;--rose-dark:#b93e64;--rose-light:#f8d9df;--line:#f0d9df;--peach:#ffb58d;--lilac:#d9c7ff;--serif:'Playfair Display',Georgia,serif}
+body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
+.site-header{background:rgba(255,248,244,.9);border-bottom-color:#f3dce2}
+.brand-name{color:#702e4a}.brand-sub{color:#c65372}
+.btn-rose{background:linear-gradient(135deg,#e65d7b,#bd3d67);box-shadow:0 10px 24px #d84c7025}
+.btn-rose:hover{background:linear-gradient(135deg,#c94166,#9f2d54)}
+.hero{position:relative;overflow:hidden;padding:48px 0 66px;background:radial-gradient(ellipse at 90% 8%,#ffe1d0 0,transparent 35%),radial-gradient(ellipse at 5% 80%,#f8dce9 0,transparent 34%)}
+.hero-grid{min-height:590px}
+.hero h1 em{color:#c33f68}
+.hero-photo{filter:drop-shadow(0 20px 35px #7d38501b);position:relative}.hero-mini-photo{position:absolute;right:-22px;bottom:54px;width:34%;height:34%;padding:7px;background:white;border-radius:18px;box-shadow:0 15px 35px #7d385022;transform:rotate(7deg)}.hero-mini-photo img{width:100%;height:100%;object-fit:cover;border-radius:12px}.hero-sticker{position:absolute;top:25px;left:-18px;background:#ffd76b;color:#6d3b33;width:92px;height:92px;border-radius:50%;display:grid;place-content:center;text-align:center;font:italic 15px var(--serif);line-height:1.2;box-shadow:0 8px 20px #7d385022;transform:rotate(-10deg)}.hero-sticker b{font-size:18px}@media(max-width:680px){.hero-mini-photo{right:-8px;bottom:42px;width:31%;height:30%;padding:5px;border-radius:12px}.hero-mini-photo img{border-radius:8px}.hero-sticker{width:72px;height:72px;top:14px;left:-5px;font-size:12px}.hero-sticker b{font-size:15px}}
+.hero-photo>img{border-radius:20px 150px 20px 20px;border:7px solid white;box-shadow:0 18px 50px #8e43501c}
+.photo-note{border-radius:18px;border-left:4px solid #e56a88}
+.trustline .dot{background:#e86d8b}
+.section-head h2,.center-head h2{color:#4a2939}
+.gallery{gap:22px}
+.gallery-card{border-radius:18px;background:white;box-shadow:0 12px 35px #6d2d4510;border:1px solid #f3e2e7}
+.gallery-card img{aspect-ratio:4/4.7}
+.gallery-card:hover{box-shadow:0 20px 45px #6d2d4520;transform:translateY(-4px)}
+.gallery-card{transition:transform .25s,box-shadow .25s}
+.gallery-info strong{color:#552c40}
+.filter.active,.filter:hover{background:linear-gradient(135deg,#d84c75,#a83561);border-color:transparent}
+.banner{background:linear-gradient(120deg,#ffe5d5,#fbd8e7 55%,#e8dcff)}
+.banner-img{border-radius:20px;box-shadow:0 18px 45px #a34b6120}
+.feature{border-top-color:#dca6b7}
+.feature b{color:#8c3b5a}
+.flavors{background:linear-gradient(125deg,#4d2942,#713454 58%,#9a4260)}
+.flavors .eyebrow{color:#ffd5dc}
+.flavor-grid{background:#ffffff24;gap:12px}
+.flavor{background:#6b3451;border-radius:14px;border:1px solid #ffffff17}
+.flavor h3{color:#ffe0e5}
+.order{background:radial-gradient(ellipse at 0 100%,#ffe4ec 0,transparent 38%)}
+.form-card{border-radius:20px;box-shadow:0 20px 55px #8e435016;border-color:#f2dce3}
+.form-card h3{color:#632e49}
+.field input,.field select,.field textarea{border-radius:10px;background:#fffdfd}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#d45478;box-shadow:0 0 0 4px #e96a8918}
+.faq{background:linear-gradient(135deg,#fff0e7,#f9e5f0)}
+.faq details{border-radius:14px;box-shadow:0 5px 20px #783d5210}
+.instagram{background:radial-gradient(ellipse at 50% 0,#ffe4ec,transparent 70%)}
+.wa-float{box-shadow:0 10px 30px #12984a50}
+.footer{background:#fff9f7}
+@media(max-width:680px){.hero{padding:18px 0 42px}.hero-grid{min-height:0}.hero-photo>img{border-radius:16px 85px 16px 16px;border-width:5px}.gallery{gap:12px}.gallery-card img{aspect-ratio:4/4.5}.gallery-card{border-radius:13px}.banner{background:linear-gradient(160deg,#ffe6d8,#fbdce8)}.banner-img{border-radius:16px}.flavor{border-radius:12px}}
+
+/* Centralized editorial alignment requested */
+.hero-copy{text-align:center;margin-inline:auto;max-width:620px}
+.hero-copy .eyebrow,.hero-text,.hero h1{margin-inline:auto}
+.hero-actions,.trustline{justify-content:center}
+.hero-grid{align-items:center}
+.section-head{display:block;text-align:center}
+.section-head p{margin:14px auto 0}
+.gallery-info{text-align:center}
+.banner-copy{text-align:center}
+.feature-row{text-align:center}
+.banner-copy>.btn{margin-inline:auto}
+.flavors .wrap{text-align:center}
+.flavor-grid{text-align:center}
+.order-copy{text-align:center}
+.steps{text-align:left;max-width:440px;margin-inline:auto}
+.center-head{text-align:center}
+.instagram{text-align:center}
+@media(max-width:680px){
+ .hero-copy{text-align:center}
+ .hero-actions{justify-content:center}
+ .hero-grid{gap:22px}
+ .section-head{text-align:center}
+ .section-head p{margin:12px auto 0}
+ .order-copy{text-align:center}
+}
+
+
+/* Destaque editorial e alinhamento central */
 .hero-copy,.section-head,.banner-copy,.order-copy,.center-head,.instagram{text-align:center}
 .hero-copy{margin-inline:auto}
 .hero h1,.hero-text,.section-head p{margin-left:auto;margin-right:auto}
 .hero-actions,.trustline{justify-content:center}
 .section-head{display:block}
-.section-head p{max-width:620px;margin:14px auto 0}
-.banner-copy>.btn,.order-copy>.btn{display:flex;width:max-content;margin:24px auto 0}
+.section-head p{max-width:620px;margin-top:14px}
+.banner-grid{align-items:center}
+.banner-copy .feature-row{justify-items:center}
+.banner-copy>.btn{margin-inline:auto}
+.order-copy .steps{text-align:left}
 .form-card{text-align:center}
 .form-card>p{max-width:560px;margin-left:auto;margin-right:auto}
 .form-grid{text-align:left}
-.form-bottom{justify-content:center;text-align:center}
-.header-cta{display:none!important}
 @media(max-width:680px){
- .header-inner{justify-content:space-between}
- .brand{align-items:center;text-align:center;margin-inline:auto}
- .nav{display:none}
  .hero-copy,.section-head,.banner-copy,.order-copy{text-align:center}
  .hero-actions{justify-content:center}
  .section-head p{margin:12px auto 0}
  .form-card{text-align:center}
 }
 
-/* Destaque das encomendas Olívia e Rafael */
-.hero-grid{display:flex;flex-direction:column;align-items:center;gap:30px;min-height:0}
-.hero-copy{width:100%;max-width:850px;text-align:center;padding:18px 0 0}
-.hero h1{max-width:none;margin:0 auto;text-align:center}
-.hero-text{max-width:680px;margin:18px auto 24px}
-.hero-photo.featured-pair{width:100%;height:auto;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;position:static}
-.featured-pair figure{margin:0;background:var(--paper);border:1px solid var(--line);padding:10px 10px 14px;box-shadow:0 12px 35px #3528230c}
-.featured-pair img{width:100%;height:clamp(300px,42vw,520px);object-fit:contain;background:#f5f0eb;border-radius:2px}
-.featured-pair figcaption{font:500 23px var(--serif);text-align:center;padding:13px 4px 2px;color:var(--rose-dark)}
-@media(max-width:680px){.hero-photo.featured-pair{grid-template-columns:1fr;gap:15px}.featured-pair img{height:auto;max-height:520px;object-fit:contain}.hero h1{font-size:40px}}
+
+/* WhatsApp action: clean, centered, never floating */
+.header-cta{display:none!important}
+.hero-actions{justify-content:center}
+.form-bottom{justify-content:center;text-align:center}
+.form-bottom .btn{min-width:min(100%,320px);white-space:normal;text-align:center}
+.order-copy .btn,.banner-copy>.btn{display:flex;width:max-content;margin:24px auto 0}
+
+
+/* Duas encomendas em destaque, preservando o layout original */
+.hero-photo.featured-pair{height:auto;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.featured-pair figure{margin:0;background:var(--paper);border:1px solid var(--line);padding:8px;box-shadow:0 8px 24px #3528230c}
+.featured-pair img{width:100%;height:clamp(270px,34vw,430px);object-fit:cover;object-position:center;border-radius:2px}
+.featured-pair figcaption{text-align:center;font:500 18px var(--serif);color:var(--rose-dark);padding:10px 2px 3px}
+@media(max-width:680px){.hero-photo.featured-pair{grid-template-columns:1fr 1fr;gap:9px}.featured-pair img{height:245px;object-fit:cover}.featured-pair figure{padding:5px}.featured-pair figcaption{font-size:16px;padding:8px 2px}}
 </style>
 </head>
 <body>
@@ -84,12 +154,12 @@
  <div class="wrap hero-grid">
   <div class="hero-copy">
    <p class="eyebrow">Feito à mão · pensado para você</p>
-   <h1>DaPaz Confeitaria</h1>
+   <h1>Cada detalhe tem sabor de <em>memória feliz.</em></h1>
    <p class="hero-text">Mais que um bolo: uma lembrança feita para ser compartilhada. Criamos cada detalhe com carinho para transformar sua comemoração em um momento inesquecível.</p>
    <div class="hero-actions"><a class="btn btn-rose" href="#como-encomendar">Encomendar meu bolo <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#galeria">Ver inspirações</a></div>
    <div class="trustline"><span class="dot"></span> Personalizados para aniversários e celebrações</div>
   </div>
-  <div class="hero-photo featured-pair" aria-label="Bolos personalizados Olívia e Rafael"><figure><img src="img/IMG-20261123-WA0074.jpg" alt="Bolo personalizado da Olívia, tema Chapeuzinho Vermelho" fetchpriority="high"><figcaption>Olívia</figcaption></figure><figure><img src="img/IMG-20261123-WA0073.jpg" alt="Bolo personalizado do Rafael, tema personagens Looney Tunes"><figcaption>Rafael</figcaption></figure></div>
+  <div class="hero-photo featured-pair" aria-label="Bolos personalizados Olívia e Rafael"><figure><img src="img/IMG-20261123-WA0074.jpg" alt="Bolo personalizado da Olívia, tema Chapeuzinho Vermelho" fetchpriority="high"><figcaption>Olívia</figcaption></figure><figure><img src="img/IMG-20261123-WA0073.jpg" alt="Bolo personalizado do Rafael, tema Looney Tunes"><figcaption>Rafael</figcaption></figure></div>
  </div>
 </section>
 <section id="galeria" class="section">
