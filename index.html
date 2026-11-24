@@ -154,6 +154,80 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
 @keyframes dapaz-logo-glow{from{text-shadow:0 0 4px #ffc4d8,0 0 9px #f3a2c0,0 0 16px #e7a8ff60}to{text-shadow:0 0 7px #ffc4d8,0 0 16px #f08ab2,0 0 26px #d7a2ffb0}}
 @media(prefers-reduced-motion:reduce){.brand-name{animation:none}}
 
+
+/* Identidade neon DaPaz: botões e controles com brilho elegante */
+.btn{
+  color:#fff;
+  border:1px solid #f6a6d0;
+  background:linear-gradient(120deg,#ff4f9a 0%,#d94cff 52%,#a94dff 100%);
+  box-shadow:0 0 8px #ff63ad80,0 0 18px #d94cff45,inset 0 1px 0 #ffffff70;
+  text-shadow:0 1px 2px #70204d55;
+  transition:transform .22s ease,box-shadow .22s ease,filter .22s ease,background .22s ease;
+}
+.btn-dark,.btn-rose{
+  color:#fff;
+  background:linear-gradient(120deg,#ff4f9a 0%,#d94cff 52%,#a94dff 100%);
+  border-color:#f6a6d0;
+  box-shadow:0 0 8px #ff63ad80,0 0 18px #d94cff45,inset 0 1px 0 #ffffff70;
+}
+.btn-outline{
+  color:#a83f78;
+  border:1px solid #e66ab2;
+  background:linear-gradient(135deg,#fffafd,#fce9f7);
+  box-shadow:0 0 7px #ed78bd55, inset 0 0 10px #ffffff;
+  text-shadow:none;
+}
+.btn:hover,.btn-dark:hover,.btn-rose:hover,.btn-outline:hover{
+  color:#fff;
+  background:linear-gradient(120deg,#ff2788 0%,#c52dff 55%,#8740ff 100%);
+  border-color:#ffb5dc;
+  transform:translateY(-3px);
+  box-shadow:0 0 10px #ff4f9a,0 0 24px #d94cff99,0 8px 22px #a83f7850;
+  filter:saturate(1.12);
+}
+.btn:active{transform:translateY(-1px) scale(.98)}
+.filter{
+  border:1px solid #e78ac0;
+  color:#8d426d;
+  background:#fff8fc;
+  box-shadow:0 0 6px #e879b533;
+  transition:all .2s ease;
+}
+.filter.active,.filter:hover{
+  color:#fff;
+  border-color:#ffb5dc;
+  background:linear-gradient(120deg,#ff4f9a,#d94cff 60%,#a94dff);
+  box-shadow:0 0 8px #ff63ad99,0 0 18px #d94cff66;
+  transform:translateY(-1px);
+}
+.menu-btn{
+  border:1px solid #e66ab2;
+  color:#a83f78;
+  background:linear-gradient(135deg,#fffafd,#fce9f7);
+  box-shadow:0 0 8px #ed78bd66,0 0 16px #d94cff30;
+}
+.menu-btn:hover{
+  color:#fff;
+  background:linear-gradient(120deg,#ff4f9a,#d94cff 60%,#a94dff);
+  box-shadow:0 0 10px #ff63ad,0 0 20px #d94cff88;
+}
+.modal button{
+  border:1px solid #ffb5dc;
+  background:linear-gradient(120deg,#ff4f9a,#d94cff 60%,#a94dff);
+  color:#fff;
+  box-shadow:0 0 10px #ff63ad,0 0 22px #d94cff99;
+}
+.gallery-card{transition:box-shadow .22s ease,outline-color .22s ease}
+.gallery-card:hover{box-shadow:0 0 0 2px #f28ac5,0 0 18px #d94cff55}
+button:focus-visible,a.btn:focus-visible{
+  outline:3px solid #d94cff;
+  outline-offset:4px;
+  box-shadow:0 0 0 5px #ff63ad44,0 0 20px #d94cff88;
+}
+@media(prefers-reduced-motion:reduce){
+  .btn,.filter,.menu-btn,.gallery-card{transition:none}
+}
+
 </style>
 </head>
 <body>
