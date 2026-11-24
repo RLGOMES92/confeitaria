@@ -100,6 +100,28 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
  .order-copy{text-align:center}
 }
 
+
+/* Destaque editorial e alinhamento central */
+.hero-copy,.section-head,.banner-copy,.order-copy,.center-head,.instagram{text-align:center}
+.hero-copy{margin-inline:auto}
+.hero h1,.hero-text,.section-head p{margin-left:auto;margin-right:auto}
+.hero-actions,.trustline{justify-content:center}
+.section-head{display:block}
+.section-head p{max-width:620px;margin-top:14px}
+.banner-grid{align-items:center}
+.banner-copy .feature-row{justify-items:center}
+.banner-copy>.btn{margin-inline:auto}
+.order-copy .steps{text-align:left}
+.form-card{text-align:center}
+.form-card>p{max-width:560px;margin-left:auto;margin-right:auto}
+.form-grid{text-align:left}
+@media(max-width:680px){
+ .hero-copy,.section-head,.banner-copy,.order-copy{text-align:center}
+ .hero-actions{justify-content:center}
+ .section-head p{margin:12px auto 0}
+ .form-card{text-align:center}
+}
+
 </style>
 </head>
 <body>
@@ -117,8 +139,8 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
  <div class="wrap hero-grid">
   <div class="hero-copy">
    <p class="eyebrow">Feito à mão · pensado para você</p>
-   <h1>Um bolo especial para um momento <em>inesquecível.</em></h1>
-   <p class="hero-text">Criamos bolos personalizados com carinho, delicadeza e atenção a cada detalhe. Você imagina a celebração — nós ajudamos a dar forma e sabor.</p>
+   <h1>Cada detalhe tem sabor de <em>memória feliz.</em></h1>
+   <p class="hero-text">Mais que um bolo: uma lembrança feita para ser compartilhada. Criamos cada detalhe com carinho para transformar sua comemoração em um momento inesquecível.</p>
    <div class="hero-actions"><a class="btn btn-rose" href="#como-encomendar">Encomendar meu bolo <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#galeria">Ver inspirações</a></div>
    <div class="trustline"><span class="dot"></span> Personalizados para aniversários e celebrações</div>
   </div>
@@ -127,7 +149,7 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
 </section>
 <section id="galeria" class="section">
  <div class="wrap">
-  <div class="section-head"><div><p class="eyebrow">Nosso trabalho</p><h2>Inspirações para a sua festa</h2></div><p>Explore algumas criações e imagine o bolo que combina com a sua comemoração. Cada encomenda pode ser adaptada à sua ideia.</p></div>
+  <div class="section-head"><div><p class="eyebrow">Nosso trabalho</p><h2>Histórias lindas começam com um bolo</h2></div><p>Do primeiro olhar ao último pedaço, cada criação é feita para encantar. Escolha sua inspiração e conte para nós como será sua celebração.</p></div>
   <div class="filters" role="group" aria-label="Filtrar galeria"><button class="filter active" data-filter="all">Todos</button><button class="filter" data-filter="infantil">Infantil</button><button class="filter" data-filter="delicado">Delicados</button></div>
   <div class="gallery" id="galleryGrid"></div>
  </div>
@@ -135,7 +157,7 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
 <section class="banner">
  <div class="wrap banner-grid">
   <img class="banner-img" src="img/nossa.jpeg" alt="Bolo delicado personalizado artesanal da DaPaz" loading="lazy">
-  <div class="banner-copy"><p class="eyebrow">A sua ideia ganha vida</p><h2>Detalhes que fazem parte da memória.</h2><p>Mais do que um bolo, um pedacinho da celebração. Trabalhamos com temas, cores, sabores e acabamentos escolhidos para deixar seu momento com a sua identidade.</p><div class="feature-row"><div class="feature"><b>Com carinho</b><p>Produção artesanal</p></div><div class="feature"><b>Do seu jeito</b><p>Temas e detalhes</p></div><div class="feature"><b>Feito para celebrar</b><p>Momentos especiais</p></div></div><a class="btn btn-dark" href="#como-encomendar" style="margin-top:24px">Vamos planejar? ↗</a></div>
+  <div class="banner-copy"><p class="eyebrow">A sua ideia ganha vida</p><h2>Seu momento merece ser único.</h2><p>Tem festa que passa. E tem lembrança que fica para sempre. Criamos bolos personalizados para dar ainda mais significado aos seus momentos especiais.</p><div class="feature-row"><div class="feature"><b>Com carinho</b><p>Produção artesanal</p></div><div class="feature"><b>Do seu jeito</b><p>Temas e detalhes</p></div><div class="feature"><b>Feito para celebrar</b><p>Momentos especiais</p></div></div><a class="btn btn-dark" href="#como-encomendar" style="margin-top:24px">Vamos planejar? ↗</a></div>
  </div>
 </section>
 <section id="sabores" class="flavors">
@@ -148,7 +170,7 @@ body{background:linear-gradient(180deg,#fff8f4 0%,#fffdfb 45%,#fff5f8 100%)}
 </section>
 <section id="como-encomendar" class="order">
  <div class="wrap order-grid">
-  <div class="order-copy"><p class="eyebrow">Vamos conversar</p><h2>Seu bolo começa com uma ideia.</h2><p>Envie algumas informações para adiantar o atendimento. Nossa equipe conversa com você sobre os detalhes, disponibilidade e orçamento.</p><div class="steps"><div class="step"><span class="step-num">1</span><div><b>Conte sobre a festa</b><p>Data, ocasião e quantidade de convidados.</p></div></div><div class="step"><span class="step-num">2</span><div><b>Compartilhe sua inspiração</b><p>Tema, cores, sabor ou uma foto de referência.</p></div></div><div class="step"><span class="step-num">3</span><div><b>Combine pelo WhatsApp</b><p>Confirme os detalhes com a confeitaria.</p></div></div></div></div>
+  <div class="order-copy"><p class="eyebrow">Vamos conversar</p><h2>A sua história merece um bolo à altura.</h2><p>Imagine. Escolha os detalhes. Celebre. Conte sua ideia e vamos criar juntos um bolo que tenha a sua cara.</p><div class="steps"><div class="step"><span class="step-num">1</span><div><b>Conte sobre a festa</b><p>Data, ocasião e quantidade de convidados.</p></div></div><div class="step"><span class="step-num">2</span><div><b>Compartilhe sua inspiração</b><p>Tema, cores, sabor ou uma foto de referência.</p></div></div><div class="step"><span class="step-num">3</span><div><b>Combine pelo WhatsApp</b><p>Confirme os detalhes com a confeitaria.</p></div></div></div></div>
   <div class="form-card"><h3>Solicite seu orçamento</h3><p>Preencha o formulário. A mensagem será preparada para você enviar pelo WhatsApp.</p>
    <form id="quoteForm"><div class="form-grid">
     <div class="field"><label for="nome">Seu nome *</label><input id="nome" name="nome" autocomplete="name" required placeholder="Como podemos te chamar?"></div>
